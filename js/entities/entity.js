@@ -1,10 +1,11 @@
 var Entity = function() {
   this.x = 0;
   this.y = 0;
-  this.step = 1;
+  this.horizontalStep = 1;
+  this.verticalStep = 1;
 
-  this.width = 32;
-  this.height = 32;
+  this.width = 1 * Constants.unit;
+  this.height = 1 * Constants.unit;
   this.color = "black";
 };
 
@@ -13,19 +14,19 @@ Entity.prototype.draw = function(view) {
 };
 
 Entity.prototype.moveLeft = function() {
-  this.x -= this.step;
+  this.x -= this.horizontalStep;
 };
 
 Entity.prototype.moveRight = function() {
-  this.x += this.step;
+  this.x += this.horizontalStep;
 };
 
 Entity.prototype.moveUp = function() {
-  this.y -= this.step;
+  this.y -= this.verticalStep;
 };
 
 Entity.prototype.moveDown = function() {
-  this.y += this.step;
+  this.y += this.verticalStep;
 };
 
 Entity.prototype.update = function() {
