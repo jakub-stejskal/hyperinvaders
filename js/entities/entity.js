@@ -30,6 +30,12 @@ Entity.prototype.moveDown = function() {
   this.y += this.verticalStep;
 };
 
+Entity.prototype.top = function() { return this.y; };
+Entity.prototype.bottom = function() { return this.y + this.height; };
+Entity.prototype.left = function() { return this.x; };
+Entity.prototype.right = function() { return this.x + this.width; };
+
+
 Entity.prototype.update = function(game) {
 };
 
@@ -38,6 +44,6 @@ Entity.prototype.destroy = function() {
 };
 
 Entity.prototype.isOutOfBounds = function() {
-  return this.x < 0 || this.x + this.width > Constants.width ||
-    this.y < 0 || this.y + this.height > Constants.height;
+  return this.left() < 0 || this.right() > Constants.width ||
+    this.top() < 0 || this.bottom() > Constants.height;
 };

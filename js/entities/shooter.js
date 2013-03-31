@@ -12,7 +12,7 @@ Shooter.prototype.update = function(game) {
 Shooter.prototype.shoot = function() {
   if (!this.cooldown) {
     var x = this.x + this.width / 2;
-    var y = this.hostile ? this.y + this.height : this.y;
+    var y = this.hostile ? this.bottom() : this.top();
     this.cooldown = Constants.cooldown;
     return new Projectile(this.hostile, x, y);
   }
