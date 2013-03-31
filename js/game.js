@@ -1,6 +1,8 @@
   var Game = function(view) {
     this.view = view || new View();
     this.view.game = this;
+    this.sound = new Sound();
+
     this.entities = {
       players: [],
       enemies: [],
@@ -65,6 +67,7 @@
         this.time = 0;
         this.beat = (this.beat % 4) + 1;
 
+        this.sound.playBeat(this.beat);
         this.enemyShoot();
         this.forEachOf(this.entities.enemies, "update", this);
       }
@@ -83,6 +86,7 @@
   Game.prototype.forEachOf = function (list, fn, arg) {
     for (var i = list.length - 1; i >= 0; i--) {
       if (list[i].destroyed) {
+        this.sound.playExplosion(list[i].hostile);
         list.splice(i, 1);
       }
       else {
@@ -99,6 +103,7 @@
 
   Game.prototype.onShot = function(projectile) {
     if (projectile) {
+      if (!projectile.hostile) this.sound.playShot();
       this.entities.projectiles.push(projectile);
     }
   };
@@ -106,10 +111,12 @@
   Game.prototype.checkGameEvents = function() {
     if (this.entities.enemies.length === 0) {
       this.paused = true;
+      this.sound.playVictory();
       console.log("Game won.");
     }
     if (this.entities.players.length === 0){
       this.paused = true;
+      this.sound.playDefeat();
       console.log("Game lost.");
     }
   };
