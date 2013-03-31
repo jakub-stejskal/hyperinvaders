@@ -6,12 +6,16 @@ var Enemy = function(x, y) {
 
   this.color = "red";
   this.position = 1;
+  this.shouldShoot = false;
 };
 
-Enemy.prototype = new Shooter();
+Enemy.prototype = new Shooter(true);
 
-Enemy.prototype.update = function(beat) {
-    if (Math.abs(this.position) == 17) {
+Enemy.prototype.update = function(game) {
+  // TODO: cooldown is hackish - change Enemy update cycle and call super instead
+  this.cooldown = 0;
+
+  if (Math.abs(this.position) == 17) {
     this.position = this.position / -17;
     this.moveDown();
   }
@@ -21,6 +25,11 @@ Enemy.prototype.update = function(beat) {
   }
   else {
     this.moveRight();
+  }
+
+  if (this.shouldShoot) {
+    game.onShot(this.shoot());
+    this.shouldShoot = false;
   }
 
   this.position = this.position + (this.position>0 ? 1: -1);

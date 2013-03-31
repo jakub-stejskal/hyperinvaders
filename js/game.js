@@ -14,7 +14,7 @@ var Game = function(view) {
 
 Game.prototype.start = function() {
   this.view.display();
-  this.entities.players.push(new Player()); //TODO array of entities
+  this.entities.players.push(new Player());
   this.entities.enemies.push(new Enemy(1,1));
   this.entities.enemies.push(new Enemy(3,1));
   this._onEachFrame(Game.prototype.run);
@@ -60,6 +60,9 @@ Game.prototype.update = function() {
   if (this.time == this.tempo) {
     this.time = 0;
     this.beat = (this.beat % 4) + 1;
+
+    var shooter = this.entities.enemies[Math.floor(Math.random() * this.entities.enemies.length)];
+    shooter.shouldShoot = true;
     this.forEachOf(this.entities.enemies, "update", this);
   }
   this.forEachOf(this.entities.players,"update", this);
