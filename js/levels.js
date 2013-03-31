@@ -3,7 +3,7 @@ var Levels = {
     enemies: (function() {
       var enemies = [];
       for (var row = 0; row < 5; row++) {
-        for (var col = 0; col < 12; col++) {
+        for (var col = 2; col < 14; col++) {
           enemies.push(new Enemy(col, row));
         }
       }

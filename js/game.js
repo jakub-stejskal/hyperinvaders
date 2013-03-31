@@ -110,13 +110,21 @@
 
   Game.prototype.checkGameEvents = function() {
     if (this.entities.enemies.length === 0) {
-      this.paused = true;
-      this.sound.playVictory();
-      console.log("Game won.");
+      this.handleVictory();
     }
     if (this.entities.players.length === 0){
-      this.paused = true;
-      this.sound.playDefeat();
-      console.log("Game lost.");
+      this.handleDefeat();
     }
+  };
+
+  Game.prototype.handleVictory = function() {
+    this.paused = true;
+    this.sound.playVictory();
+    console.log("Game won.");
+  };
+
+  Game.prototype.handleDefeat = function() {
+    this.paused = true;
+    this.sound.playDefeat();
+    console.log("Game lost.");
   };

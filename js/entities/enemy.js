@@ -20,6 +20,10 @@ Enemy.prototype.update = function(game) {
     this.moveDown();
   }
 
+  if (this.bottom() + 1 * Constants.unit > Constants.height) {
+    game.handleDefeat();
+  }
+
   if (this.position < 0) {
     this.moveLeft();
   }
