@@ -15,9 +15,9 @@
 
   Game.prototype.start = function() {
     this.view.display();
+
     this.entities.players.push(new Player());
-    this.entities.enemies.push(new Enemy(1,1));
-    this.entities.enemies.push(new Enemy(3,1));
+    this.entities.enemies = Levels.initializeEnemies("first");
     this._onEachFrame(Game.prototype.run);
   };
 
