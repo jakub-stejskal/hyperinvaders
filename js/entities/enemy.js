@@ -8,7 +8,7 @@ var Enemy = function(x, y) {
   this.position = 1;
 };
 
-Enemy.prototype = new Entity();
+Enemy.prototype = new Shooter();
 
 Enemy.prototype.update = function(beat) {
     if (Math.abs(this.position) == 17) {

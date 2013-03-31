@@ -4,3 +4,5 @@ var Constants = {
   height: 480,
   fps: 60
 };
+
+Constants.cooldown = Constants.fps / 2;

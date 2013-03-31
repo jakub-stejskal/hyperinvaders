@@ -7,6 +7,7 @@ var Entity = function() {
   this.width = 1 * Constants.unit;
   this.height = 1 * Constants.unit;
   this.color = "black";
+  this.destroyed = false;
 };
 
 Entity.prototype.draw = function(view) {
@@ -29,5 +30,14 @@ Entity.prototype.moveDown = function() {
   this.y += this.verticalStep;
 };
 
-Entity.prototype.update = function() {
+Entity.prototype.update = function(game) {
+};
+
+Entity.prototype.destroy = function() {
+  this.destroyed = true;
+};
+
+Entity.prototype.isOutOfBounds = function() {
+  return this.x < 0 || this.x + this.width > Constants.width ||
+    this.y < 0 || this.y + this.height > Constants.height;
 };

@@ -2,8 +2,9 @@ var Game = function(view) {
   this.view = view || new View();
   this.view.game = this;
   this.entities = {
-    player: null,
-    enemies: []
+    players: [],
+    enemies: [],
+    projectiles: []
   };
 
   this.tempo = Constants.fps / 2;
@@ -13,7 +14,7 @@ var Game = function(view) {
 
 Game.prototype.start = function() {
   this.view.display();
-  this.entities.player = new Player(); //TODO array of entities
+  this.entities.players.push(new Player()); //TODO array of entities
   this.entities.enemies.push(new Enemy(1,1));
   this.entities.enemies.push(new Enemy(3,1));
   this._onEachFrame(Game.prototype.run);
@@ -59,18 +60,31 @@ Game.prototype.update = function() {
   if (this.time == this.tempo) {
     this.time = 0;
     this.beat = (this.beat % 4) + 1;
-    this.forEachEnemy("update", this.beat);
+    this.forEachOf(this.entities.enemies, "update", this);
   }
-  this.entities.player.update();
+  this.forEachOf(this.entities.players,"update", this);
+  this.forEachOf(this.entities.projectiles,"update", this);
 };
 
-Game.prototype.forEachEnemy = function (fn, arg) {
-  for (var i = this.entities.enemies.length - 1; i >= 0; i--) {
-    this.entities.enemies[i][fn](arg);
+Game.prototype.forEachOf = function (list, fn, arg) {
+  for (var i = list.length - 1; i >= 0; i--) {
+    if (list[i].destroyed) {
+      list.splice(i, 1);
+    }
+    else {
+      list[i][fn](arg);
+    }
   }
 };
 
 Game.prototype.forEachEntity = function (fn, arg) {
-  this.entities.player[fn](arg);
-  this.forEachEnemy(fn, arg);
+  this.forEachOf(this.entities.players, fn, arg);
+  this.forEachOf(this.entities.enemies, fn, arg);
+  this.forEachOf(this.entities.projectiles, fn, arg);
+};
+
+Game.prototype.onShot = function(projectile) {
+  if (projectile) {
+    this.entities.projectiles.push(projectile);
+  }
 };
