@@ -4,8 +4,8 @@ var Entity = function() {
   this.horizontalStep = 1;
   this.verticalStep = 1;
 
-  this.width = 1 * Constants.unit;
-  this.height = 1 * Constants.unit;
+  this.width = 0.8 * Constants.unit;
+  this.height = 0.8 * Constants.unit;
   this.color = "black";
   this.destroyed = false;
 };
