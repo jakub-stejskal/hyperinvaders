@@ -5,7 +5,6 @@ var Enemy = function(x, y) {
   this.verticalStep = 0.25 * Constants.unit;
 
   this.color = "red";
-  this.position = 1;
   this.shouldShoot = false;
 };
 
@@ -15,22 +14,12 @@ Enemy.prototype.update = function(game) {
   // TODO: cooldown is hackish - change Enemy update cycle and call super instead
   this.cooldown = 0;
 
-  if (Math.abs(this.position) == 17) {
-    this.position = this.position / -17;
-    this.moveDown();
-  }
-  else {
-    if (this.position < 0) {
-      this.moveLeft();
-    }
-    else {
-      this.moveRight();
-    }
-    this.position = this.position + (this.position>0 ? 1: -1);
-  }
-
-  if (this.bottom() + 1 * Constants.unit > Constants.height) {
+  if (this.bottom() > Constants.bottomBoundary) {
     game.handleDefeat();
+  }
+  else if (this.left() < Constants.leftBoundary ||
+    this.right() > Constants.rightBoundary) {
+    game.changeManeuver();
   }
 
   if (this.shouldShoot) {

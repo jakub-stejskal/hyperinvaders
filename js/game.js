@@ -17,6 +17,7 @@
     this.beatTime = 0;
     this.beat = 0;
     this.shootTime = 0;
+    this.maneuver = "turnRight";
     this.paused = false;
   };
 
@@ -77,8 +78,10 @@
         this.beat = (this.beat % 4) + 1;
 
         this.sound.playBeat(this.beat);
-        this.forEachOf(this.entities.enemies, "update", this);
+        this.enemyMove();
       }
+      // TODO forEachEntity update
+      this.forEachOf(this.entities.enemies, "update", this);
       this.forEachOf(this.entities.players,"update", this);
       this.forEachOf(this.entities.projectiles,"update", this);
 
@@ -88,6 +91,36 @@
     }
   };
 
+  Game.prototype.enemyMove = function() {
+    console.log(this.maneuver);
+    switch (this.maneuver) {
+      case "turnLeft":
+      case "left":
+      this.forEachOf(this.entities.enemies, "moveLeft");
+      this.maneuver = "left";
+      break;
+      case "leftDescent":
+      this.forEachOf(this.entities.enemies, "moveDown");
+      this.maneuver = "turnRight";
+      break;
+      case "turnRight":
+      case "right":
+      this.forEachOf(this.entities.enemies, "moveRight");
+      this.maneuver = "right";
+      break;
+      case "rightDescent":
+      this.forEachOf(this.entities.enemies, "moveDown");
+      this.maneuver = "turnLeft";
+      break;
+    }
+  };
+
+  Game.prototype.changeManeuver = function() {
+    switch (this.maneuver) {
+      case "left": this.maneuver = "leftDescent"; break;
+      case "right": this.maneuver = "rightDescent"; break;
+    }
+  };
   Game.prototype.enemyShoot = function() {
     var shooter = this.entities.enemies[Math.floor(Math.random() * this.entities.enemies.length)];
     shooter.shouldShoot = true;

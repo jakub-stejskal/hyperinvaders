@@ -15,10 +15,10 @@ Player.prototype.update = function(game) {
   if (Key.isDown(Key.UP)) {
     game.onShot(this.shoot());
   }
-  if (Key.isDown(Key.LEFT) && this.left() > 2 * Constants.unit) {
+  if (Key.isDown(Key.LEFT) && this.left() > Constants.leftBoundary) {
     this.moveLeft();
   }
-  if (Key.isDown(Key.RIGHT) && this.right() < Constants.width - 2 * Constants.unit ) {
+  if (Key.isDown(Key.RIGHT) && this.right() < Constants.rightBoundary) {
     this.moveRight();
   }
 };
