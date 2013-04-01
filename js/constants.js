@@ -1,8 +1,11 @@
-var Constants = {
-  unit: 32,
-  width: 640,
-  height: 480,
-  fps: 60
-};
+var Constants = {};
 
+Constants.unit = 32;
+Constants.width = 640;
+Constants.height = 480;
+Constants.leftBoundary = 2 * Constants.unit;
+Constants.rightBoundary = Constants.width - 2 * Constants.unit;
+Constants.bottomBoundary = Constants.height - 1 * Constants.unit;
+
+Constants.fps = 60;
 Constants.cooldown = Constants.fps / 2;
