@@ -19,7 +19,7 @@ Enemy.prototype.update = function(game) {
   }
   else if (this.left() < Constants.leftBoundary ||
     this.right() > Constants.rightBoundary) {
-    game.changeManeuver();
+    game.commander.changeManeuver();
   }
 
   if (this.shouldShoot) {

@@ -9,6 +9,7 @@ var Loader = {
   "js/entities/player.js",
   "js/entities/enemy.js",
   "js/entities/projectile.js",
+  "js/commander.js",
   "js/levels.js",
   "js/view.js",
   "js/sound.js",

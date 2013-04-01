@@ -11,19 +11,17 @@
       projectiles: []
     };
 
+    this.commander = null;
+
     this.level = "first";
-    this.tempo = Constants.fps / 2;
-    this.speed = 1;
-    this.beatTime = 0;
-    this.beat = 0;
-    this.shootTime = 0;
-    this.maneuver = "turnRight";
     this.paused = false;
   };
 
   Game.prototype.start = function() {
     this.entities.players.push(new Player());
     this.entities.enemies = Levels.initializeEnemies(this.level);
+    this.commander = new Commander(this.entities.enemies, this);
+
     this._onEachFrame(Game.prototype.run);
   };
 
@@ -65,65 +63,9 @@
   Game.prototype.update = function() {
     if (!this.paused) {
       this.checkGameEvents();
-
-      this.shootTime++;
-      if (this.shootTime >= 2 * this.tempo) {
-        this.shootTime = 0;
-        this.enemyShoot();
-      }
-
-      this.beatTime++;
-      if (this.beatTime >= Math.ceil(this.tempo * this.speed)) {
-        this.beatTime = 0;
-        this.beat = (this.beat % 4) + 1;
-
-        this.sound.playBeat(this.beat);
-        this.enemyMove();
-      }
-      // TODO forEachEntity update
-      this.forEachOf(this.entities.enemies, "update", this);
-      this.forEachOf(this.entities.players,"update", this);
-      this.forEachOf(this.entities.projectiles,"update", this);
-
-      if (this.beat == 1) {
-        this.speed = this.entities.enemies.length / Levels[this.level].enemyCount;
-      }
+      this.commander.command();
+      this.forEachEntity("update", this);
     }
-  };
-
-  Game.prototype.enemyMove = function() {
-    console.log(this.maneuver);
-    switch (this.maneuver) {
-      case "turnLeft":
-      case "left":
-      this.forEachOf(this.entities.enemies, "moveLeft");
-      this.maneuver = "left";
-      break;
-      case "leftDescent":
-      this.forEachOf(this.entities.enemies, "moveDown");
-      this.maneuver = "turnRight";
-      break;
-      case "turnRight":
-      case "right":
-      this.forEachOf(this.entities.enemies, "moveRight");
-      this.maneuver = "right";
-      break;
-      case "rightDescent":
-      this.forEachOf(this.entities.enemies, "moveDown");
-      this.maneuver = "turnLeft";
-      break;
-    }
-  };
-
-  Game.prototype.changeManeuver = function() {
-    switch (this.maneuver) {
-      case "left": this.maneuver = "leftDescent"; break;
-      case "right": this.maneuver = "rightDescent"; break;
-    }
-  };
-  Game.prototype.enemyShoot = function() {
-    var shooter = this.entities.enemies[Math.floor(Math.random() * this.entities.enemies.length)];
-    shooter.shouldShoot = true;
   };
 
   Game.prototype.forEachOf = function (list, fn, arg) {

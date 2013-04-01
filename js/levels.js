@@ -12,11 +12,6 @@ var Levels = {
   }
 };
 
-for (var levelName in Levels) {
-   var level = Levels[levelName];
-   level.enemyCount = level.enemies.length;
-}
-
 Levels.initializeEnemies = function(level) {
   return Levels[level].enemies;
 };
