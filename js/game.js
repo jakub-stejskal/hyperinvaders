@@ -1,6 +1,8 @@
   var Game = function(view) {
     this.view = view || new View();
     this.view.game = this;
+    this.view.display();
+
     this.sound = new Sound();
 
     this.entities = {
@@ -9,17 +11,18 @@
       projectiles: []
     };
 
+    this.level = "first";
     this.tempo = Constants.fps / 2;
-    this.time = 0;
+    this.speed = 1;
+    this.beatTime = 0;
     this.beat = 0;
+    this.shootTime = 0;
     this.paused = false;
   };
 
   Game.prototype.start = function() {
-    this.view.display();
-
     this.entities.players.push(new Player());
-    this.entities.enemies = Levels.initializeEnemies("first");
+    this.entities.enemies = Levels.initializeEnemies(this.level);
     this._onEachFrame(Game.prototype.run);
   };
 
@@ -62,25 +65,32 @@
     if (!this.paused) {
       this.checkGameEvents();
 
-      this.time++;
-      if (this.time == this.tempo) {
-        this.time = 0;
+      this.shootTime++;
+      if (this.shootTime >= 2 * this.tempo) {
+        this.shootTime = 0;
+        this.enemyShoot();
+      }
+
+      this.beatTime++;
+      if (this.beatTime >= Math.ceil(this.tempo * this.speed)) {
+        this.beatTime = 0;
         this.beat = (this.beat % 4) + 1;
 
         this.sound.playBeat(this.beat);
-        this.enemyShoot();
         this.forEachOf(this.entities.enemies, "update", this);
       }
       this.forEachOf(this.entities.players,"update", this);
       this.forEachOf(this.entities.projectiles,"update", this);
+
+      if (this.beat == 1) {
+        this.speed = this.entities.enemies.length / Levels[this.level].enemyCount;
+      }
     }
   };
 
   Game.prototype.enemyShoot = function() {
-    if (this.beat % 2 == 1) {
-      var shooter = this.entities.enemies[Math.floor(Math.random() * this.entities.enemies.length)];
-      shooter.shouldShoot = true;
-    }
+    var shooter = this.entities.enemies[Math.floor(Math.random() * this.entities.enemies.length)];
+    shooter.shouldShoot = true;
   };
 
   Game.prototype.forEachOf = function (list, fn, arg) {
