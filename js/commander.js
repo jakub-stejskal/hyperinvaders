@@ -33,7 +33,6 @@ Commander.prototype.command = function() {
 };
 
 Commander.prototype.commandMove = function() {
-  console.log(this.maneuver);
   switch (this.maneuver) {
     case "turnLeft":
     case "left":
@@ -57,8 +56,8 @@ Commander.prototype.commandMove = function() {
 };
 
 Commander.prototype.commandShoot = function() {
-  var shooter = this.invaders[Math.floor(Math.random() * this.invaders.length)];
-  shooter.shouldShoot = true;
+  var shooterIndex = Math.floor(Math.random() * this.invaders.length);
+  this.invaders[shooterIndex].shouldShoot = true;
 };
 
 Commander.prototype.changeManeuver = function() {

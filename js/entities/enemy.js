@@ -11,8 +11,7 @@ var Enemy = function(x, y) {
 Enemy.prototype = new Shooter(true);
 
 Enemy.prototype.update = function(game) {
-  // TODO: cooldown is hackish - change Enemy update cycle and call super instead
-  this.cooldown = 0;
+  Shooter.prototype.update.call(this, game);
 
   if (this.bottom() > Constants.bottomBoundary) {
     game.handleDefeat();
