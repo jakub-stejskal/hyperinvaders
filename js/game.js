@@ -60,30 +60,39 @@
     };
   })();
 
+  Game.prototype.pause = function() {
+    this.paused = true;
+  };
+
+  Game.prototype.unpause = function() {
+    this.paused = false;
+  };
+
   Game.prototype.update = function() {
     if (!this.paused) {
       this.checkGameEvents();
       this.commander.command();
-      this.forEachEntity("update", this);
+      var game = this;
+      this.forEachEntity(function () { this.update(game); });
     }
   };
 
-  Game.prototype.forEachOf = function (list, fn, arg) {
+  Game.prototype.forEachOf = function (list, fn) {
     for (var i = list.length - 1; i >= 0; i--) {
       if (list[i].destroyed) {
         this.sound.playExplosion(list[i].hostile);
         list.splice(i, 1);
       }
       else {
-        list[i][fn](arg);
+        fn.call(list[i]);
       }
     }
   };
 
-  Game.prototype.forEachEntity = function (fn, arg) {
-    this.forEachOf(this.entities.players, fn, arg);
-    this.forEachOf(this.entities.enemies, fn, arg);
-    this.forEachOf(this.entities.projectiles, fn, arg);
+  Game.prototype.forEachEntity = function (fn) {
+    this.forEachOf(this.entities.players, fn);
+    this.forEachOf(this.entities.enemies, fn);
+    this.forEachOf(this.entities.projectiles, fn);
   };
 
   Game.prototype.onShot = function(projectile) {

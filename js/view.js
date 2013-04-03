@@ -1,7 +1,8 @@
-var View = function(element, width, height) {
+var View = function(element, width, height, drawMode) {
 	this.element = element || document.body;
 	this.width = width || Constants.width;
-	this.height = height ||Constants.height;
+	this.height = height || Constants.height;
+	this.drawFunction = this.createDrawFunction(drawMode || "squares");
 };
 
 View.prototype.display = function() {
@@ -14,9 +15,20 @@ View.prototype.display = function() {
 	this.element.appendChild(this.canvas);
 };
 
+View.prototype.createDrawFunction = function(drawMode) {
+	var view = this;
+	switch (drawMode) {
+		case "squares":
+			return function () {
+				view.drawRect(this.x, this.y, this.width, this.height, this.color);
+			};
+	}
+};
+
 View.prototype.draw = function() {
 	this.context.clearRect(0, 0, this.width, this.height);
-	this.game.forEachEntity("draw",this);
+
+	this.game.forEachEntity(this.drawFunction);
 };
 
 View.prototype.drawRect = function(x, y, width, height, color) {

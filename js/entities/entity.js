@@ -10,10 +10,6 @@ var Entity = function() {
   this.destroyed = false;
 };
 
-Entity.prototype.draw = function(view) {
-  view.drawRect(this.x, this.y, this.width, this.height, this.color);
-};
-
 Entity.prototype.moveLeft = function() {
   this.x -= this.horizontalStep;
 };
