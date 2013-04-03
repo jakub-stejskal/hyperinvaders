@@ -1,0 +1,13 @@
+{
+  "name": "hyperinvaders",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery": "latest",
+    "jquery-hashchange": "git://github.com/cowboy/jquery-hashchange.git",
+    "prefix-free": "latest",
+
+    "pubsubjs": "latest",
+    "yepnope": "latest",
+    "midijs": "git://github.com/mudcube/MIDI.js.git"
+  }
+}

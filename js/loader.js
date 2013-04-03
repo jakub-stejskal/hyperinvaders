@@ -17,15 +17,15 @@ var Loader = {
   ],
 
   sound: [
-  "js/lib/midi/MIDI/AudioDetect.js",
-  "js/lib/midi/MIDI/LoadPlugin.js",
-  "js/lib/midi/MIDI/Plugin.js",
-  "js/lib/midi/MIDI/Player.js",
-  "js/lib/midi/Window/DOMLoader.XMLHttp.js",
-  "js/lib/midi/Window/DOMLoader.script.js",
-  "js/lib/inc/WebMIDIAPI.js",
-  "js/lib/inc/Base64.js",
-  "js/lib/inc/base64binary.js"
+  "components/midijs/js/MIDI/AudioDetect.js",
+  "components/midijs/js/MIDI/LoadPlugin.js",
+  "components/midijs/js/MIDI/Plugin.js",
+  "components/midijs/js/MIDI/Player.js",
+  "components/midijs/js/Window/DOMLoader.XMLHttp.js",
+  "components/midijs/js/Window/DOMLoader.script.js",
+  "components/midijs/inc/WebMIDIAPI.js",
+  "components/midijs/inc/Base64.js",
+  "components/midijs/inc/base64binary.js"
   ]
 };
 
@@ -41,7 +41,7 @@ yepnope({
   load: Loader.sound,
   complete: function () {
     MIDI.loadPlugin({
-      soundfontUrl: "soundfont/",
+      soundfontUrl: "components/midijs/soundfont/",
       instrument: "acoustic_grand_piano",
       callback: function() {
         Loader.gameInstance.sound.setState("play");
