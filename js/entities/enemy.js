@@ -1,10 +1,12 @@
 var Enemy = function(x, y) {
-  this.x = (x || 0) * Constants.unit;
-  this.y = (y || 0) * Constants.unit;
   this.horizontalStep = 0.25 * Constants.unit;
   this.verticalStep = 0.25 * Constants.unit;
 
-  this.color = "red";
+  this.color = ["#F00", "#900"];
+  this.chars = ["A","G"];
+
+  this.x = (x || 0) * 1.2 * Constants.unit;
+  this.y = (y || 0) * Constants.unit;
   this.shouldShoot = false;
 };
 

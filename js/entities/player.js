@@ -1,10 +1,11 @@
 var Player = function() {
-  this.x = Constants.width / 2 - this.width;
-  this.y = Constants.height - this.height - 10;
-
   this.horizontalStep = 2;
 
-  this.color = "green";
+  this.color = ["#0F0"];
+  this.chars = ["Q"];
+
+  this.x = Constants.width / 2 - this.width;
+  this.y = Constants.height - this.height - 10;
 };
 
 Player.prototype = new Shooter(false);

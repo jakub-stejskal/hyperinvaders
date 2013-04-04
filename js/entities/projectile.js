@@ -1,19 +1,25 @@
 var Projectile = function(hostile, x, y) {
   this.hostile = hostile;
   this.width = 2;
-  this.height = 10;
+  this.height = 0.5 * Constants.unit;
 
   if (hostile) {
     this.verticalStep  = 5;
+
+    this.color = ["#0FF"];
+    this.chars = ["*"];
+
     this.x = x;
     this.y = y + this.height;
-    this.color = "cyan";
   }
   else {
     this.verticalStep = 10;
+
+    this.color = ["#F90"];
+    this.chars = ["|"];
+
     this.x = x;
     this.y = y;
-    this.color = "orange";
   }
 };
 

@@ -32,7 +32,8 @@ var Loader = {
 yepnope({
   load: Loader.game,
   complete: function () {
-    Loader.gameInstance = new Game();
+    var view = new View(undefined, undefined, undefined, "both");
+    Loader.gameInstance = new Game(view);
     Loader.gameInstance.start();
   }
 });

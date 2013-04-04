@@ -20,8 +20,18 @@ View.prototype.createDrawFunction = function(drawMode) {
 	switch (drawMode) {
 		case "squares":
 			return function () {
-				view.drawRect(this.x, this.y, this.width, this.height, this.color);
+				view.drawRect(this.x, this.y, this.width, this.height, this.getAppearence("color"));
 			};
+		case "chars":
+			return function () {
+				view.drawChars(this.x, this.y, this.width, this.height, this.getAppearence("chars"));
+			};
+		case "both": {
+			return function () {
+				view.drawRect(this.x, this.y, this.width, this.height, this.getAppearence("color"));
+				view.drawChars(this.x, this.y, this.width, this.height, this.getAppearence("chars"));
+			};
+		}
 	}
 };
 
@@ -34,4 +44,12 @@ View.prototype.draw = function() {
 View.prototype.drawRect = function(x, y, width, height, color) {
 	this.context.fillStyle = color;
   this.context.fillRect(x, y, width, height);
+};
+
+View.prototype.drawChars = function(x, y, width, height, chars) {
+	this.context.fillStyle = "white";
+	this.context.textAlign = "center";
+	this.context.textBaseline = "middle";
+	this.context.font = 32 + 'px Invaders';//"Invaders";
+  this.context.fillText(chars, x + width / 2, y + height / 2);
 };

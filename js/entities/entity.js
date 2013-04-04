@@ -1,13 +1,20 @@
 var Entity = function() {
-  this.x = 0;
-  this.y = 0;
+  this.width = 0.7 * Constants.unit;
+  this.height = 0.6 * Constants.unit;
   this.horizontalStep = 1;
   this.verticalStep = 1;
 
-  this.width = 0.8 * Constants.unit;
-  this.height = 0.8 * Constants.unit;
-  this.color = "black";
+  this.color = ["#FFF"];
+  this.chars = ["@"];
+  this.appearenceIndex = 0;
+
+  this.x = 0;
+  this.y = 0;
   this.destroyed = false;
+};
+
+Entity.prototype.getAppearence = function(mode) {
+  return this[mode][this.appearenceIndex];
 };
 
 Entity.prototype.moveLeft = function() {
