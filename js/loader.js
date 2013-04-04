@@ -2,6 +2,8 @@ var Loader = {
   gameInstance: null,
 
   game: [
+  "components/pubsubjs/pubsub.js",
+  "js/events.js",
   "js/constants.js",
   "js/key.js",
   "js/entities/entity.js",
@@ -29,16 +31,16 @@ var Loader = {
   ]
 };
 
-yepnope({
+yepnope([{
   load: Loader.game,
   complete: function () {
-    var view = new View(undefined, undefined, undefined, "both");
+    var view = new View(undefined, undefined, undefined, "chars");
     Loader.gameInstance = new Game(view);
     Loader.gameInstance.start();
+    Loader.gameInstance.pubsub.subscribe("hyperinvaders", function(e) {console.log(e);});
   }
-});
-
-yepnope({
+},
+{
   load: Loader.sound,
   complete: function () {
     MIDI.loadPlugin({
@@ -49,4 +51,4 @@ yepnope({
       }
     });
   }
-});
+}]);

@@ -14,7 +14,7 @@ Player.prototype.update = function(game) {
   Shooter.prototype.update.call(this, game);
 
   if (Key.isDown(Key.UP)) {
-    game.onShot(this.shoot());
+    this.shoot();
   }
   if (Key.isDown(Key.LEFT) && this.left() > Constants.leftBoundary) {
     this.moveLeft();

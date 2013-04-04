@@ -49,6 +49,7 @@ Projectile.prototype.handleCollisionsWith = function(targets) {
       this.top() < target.bottom() && this.bottom() > target.top()) {
       this.destroy();
       target.destroy();
+      this.pubsub.publish(Events.EXPLOSION, this.hostile);
     }
   }
 };

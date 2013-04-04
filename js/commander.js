@@ -11,6 +11,13 @@ var Commander = function (invaders, game) {
   this.maneuver = "turnRight";
 };
 
+Commander.prototype.init = function(pubsub) {
+  this.publishBeat = function (beat) {
+    pubsub.publish(Events.BEAT, beat);
+  };
+  return this;
+};
+
 Commander.prototype.command = function() {
   this.shootTime++;
   if (this.shootTime >= 2 * this.tempo) {
@@ -23,7 +30,7 @@ Commander.prototype.command = function() {
     this.beatTime = 0;
     this.beat = (this.beat % 4) + 1;
 
-    this.game.sound.playBeat(this.beat);
+    this.publishBeat(this.beat);
     this.commandMove();
   }
 

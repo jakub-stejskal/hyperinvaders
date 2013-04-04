@@ -13,8 +13,13 @@ var Entity = function() {
   this.destroyed = false;
 };
 
+Entity.prototype.init = function(pubsub) {
+  this.pubsub = pubsub;
+  return this;
+};
+
 Entity.prototype.getAppearence = function(mode) {
-  return this[mode][this.appearenceIndex];
+  return this[mode][this.appearenceIndex % this[mode].length];
 };
 
 Entity.prototype.moveLeft = function() {

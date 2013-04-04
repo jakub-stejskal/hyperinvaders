@@ -12,6 +12,14 @@ var Enemy = function(x, y) {
 
 Enemy.prototype = new Shooter(true);
 
+Enemy.prototype.init = function(pubsub) {
+  Shooter.prototype.init.call(this, pubsub);
+  pubsub.subscribe(Events.BEAT, function(beat){
+    this.appearenceIndex = beat;
+  }.bind(this));
+  return this;
+};
+
 Enemy.prototype.update = function(game) {
   Shooter.prototype.update.call(this, game);
 
@@ -24,7 +32,7 @@ Enemy.prototype.update = function(game) {
   }
 
   if (this.shouldShoot) {
-    game.onShot(this.shoot());
+    this.shoot();
     this.shouldShoot = false;
   }
 };

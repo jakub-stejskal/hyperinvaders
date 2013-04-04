@@ -1,6 +1,7 @@
-var Sound = function () {
+var Sound = function (pubsub) {
   this.state = "loading";
   this.playing = false;
+  this.pubsub = pubsub;
 };
 
 Sound.prototype.setState = function(state) {
@@ -15,6 +16,10 @@ Sound.prototype.setState = function(state) {
 Sound.prototype.start = function() {
   this.playing = true;
   MIDI.setVolume(0, 127);
+
+  this.pubsub.subscribe(Events.BEAT, this.playBeat.bind(this));
+  this.pubsub.subscribe(Events.EXPLOSION, this.playBeat.bind(this));
+  this.pubsub.subscribe(Events.SHOT, this.playShot.bind(this));
 };
 
 Sound.prototype.stop = function() {
@@ -30,12 +35,14 @@ Sound.prototype.playBeat = function(beat) {
   }
 };
 
-Sound.prototype.playShot = function(hostile) {
-  this.playNote(100, 127, 0.1);
+Sound.prototype.playShot = function(projectile) {
+  if (projectile.hostile === false)
+    this.playNote(100, 127, 0.1);
 };
 
 Sound.prototype.playExplosion = function(hostile) {
-  if (hostile === false) this.playNote(90, 127, 0.3);
+  if (hostile === false)
+    this.playNote(90, 127, 0.3);
 };
 
 Sound.prototype.playVictory = function() {

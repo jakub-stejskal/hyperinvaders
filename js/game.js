@@ -1,9 +1,11 @@
   var Game = function(view) {
+    this.pubsub = Pubsub.create();
+
     this.view = view || new View();
     this.view.game = this;
     this.view.display();
 
-    this.sound = new Sound();
+    this.sound = new Sound(this.pubsub);
 
     this.entities = {
       players: [],
@@ -18,9 +20,14 @@
   };
 
   Game.prototype.start = function() {
-    this.entities.players.push(new Player());
-    this.entities.enemies = Levels.initializeEnemies(this.level);
-    this.commander = new Commander(this.entities.enemies, this);
+    this.entities.players.push(new Player().init(this.pubsub));
+    this.entities.enemies = Levels.initializeEnemies(this.level, this.pubsub);
+    this.commander = new Commander(this.entities.enemies, this).init(this.pubsub);
+
+    this.pubsub.subscribe(Events.SHOT, function (projectile) {
+      console.log("Projectile!");
+      this.entities.projectiles.push(projectile);
+    }.bind(this));
 
     this._onEachFrame(Game.prototype.run);
   };
@@ -80,7 +87,6 @@
   Game.prototype.forEachOf = function (list, fn) {
     for (var i = list.length - 1; i >= 0; i--) {
       if (list[i].destroyed) {
-        this.sound.playExplosion(list[i].hostile);
         list.splice(i, 1);
       }
       else {
@@ -93,13 +99,6 @@
     this.forEachOf(this.entities.players, fn);
     this.forEachOf(this.entities.enemies, fn);
     this.forEachOf(this.entities.projectiles, fn);
-  };
-
-  Game.prototype.onShot = function(projectile) {
-    if (projectile) {
-      if (!projectile.hostile) this.sound.playShot();
-      this.entities.projectiles.push(projectile);
-    }
   };
 
   Game.prototype.checkGameEvents = function() {
