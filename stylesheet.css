@@ -1,45 +1,51 @@
 @import url(http://fonts.googleapis.com/css?family=Geo);
 
 @font-face{
-	font-family:'Entypo';
-	src:url("fonts/entypo.eot?#") format("eot"),
-	url("fonts/entypo.woff") format("woff"),
-	url("fonts/entypo.ttf") format("truetype")
+  font-family:'Entypo';
+  src:url("fonts/entypo.eot?#") format("eot"),
+  url("fonts/entypo.woff") format("woff"),
+  url("fonts/entypo.ttf") format("truetype")
+}
+
+@font-face {
+  font-family:'Invaders';
+  src:
+  url("fonts/pixel_invaders.ttf") format("truetype")
 }
 
 [data-icon]:before {
-	font-family: 'Entypo';
-	content: attr(data-icon);
-	text-transform: none;
-	margin-right: 0.1em;
-	line-height: 0;
+  font-family: 'Entypo';
+  content: attr(data-icon);
+  text-transform: none;
+  margin-right: 0.1em;
+  line-height: 0;
 }
 
 a[data-icon]:before {
-	font-size: 2em;
-	vertical-align: middle;
+  font-size: 2em;
+  vertical-align: middle;
 }
 
 body {
-	background-color: #222;
-	font-family: 'Geo', monospace;
-	text-align: center;
-	font-size: 1.2em;
+  background-color: #222;
+  font-family: 'Geo', monospace;
+  text-align: center;
+  font-size: 1.2em;
 }
 h1 {
-	margin-top: 20px;
-	font-size: 3em;
-	color: #FFF;
-	text-shadow: 0 1px 0 #999, 0 2px 0 #888, 0 3px 0 #777, 0 4px 0 #666, 
-	0px 5px 0 #555, 0 6px 0 #444, 0 7px 0 #333, 0 8px 7px #001135;
+  margin-top: 20px;
+  font-size: 3em;
+  color: #FFF;
+  text-shadow: 0 1px 0 #999, 0 2px 0 #888, 0 3px 0 #777, 0 4px 0 #666,
+  0 5px 0 #555, 0 6px 0 #444, 0 7px 0 #333, 0 8px 7px #001135;
 }
 h2 {
-	font-size: 2em;
-	margin: 50px 0 50px;
-	text-shadow: 0 5px 5px rgba(0,0,0,.25);
+  font-size: 2em;
+  margin: 50px 0 50px;
+  text-shadow: 0 5px 5px rgba(0,0,0,.25);
 }
 p {
-	margin: 20px;
+  margin: 20px;
 }
 
 .screen-centered
@@ -54,75 +60,75 @@ p {
 }
 
 @keyframes rotate-cube {
-	from {	transform: translateZ(-1000px) rotateZ(0Deg) rotateY(0Deg);}
-	to{	transform: translateZ(-1000px) rotateZ(1080Deg) rotateY(360Deg);}
+  from {  transform: translateZ(-1000px) rotateZ(0Deg) rotateY(0Deg);}
+  to{ transform: translateZ(-1000px) rotateZ(1080Deg) rotateY(360Deg);}
 }
 
 .stage {
-	perspective: 700px;
-	transform-style: preserve-3d;
-	position: absolute;
+  perspective: 700px;
+  transform-style: preserve-3d;
+  position: absolute;
 }
 
 #cube {
-	position: relative;
-	width: 600px;
-	height: 600px;
-	top: 50%;
-	left: 50%;
-	margin-top: -300px;
-	margin-left: -300px;
-	transform-style: preserve-3d;
-	transition: all 700ms;
-	transform: translateZ(-300px);
+  position: relative;
+  width: 600px;
+  height: 600px;
+  top: 50%;
+  left: 50%;
+  margin-top: -300px;
+  margin-left: -300px;
+  transform-style: preserve-3d;
+  transition: all 700ms;
+  transform: translateZ(-300px);
 }
 
-#cube {	
-	animation: rotate-cube 15s linear infinite;
-	animation-delay: 2s;
+#cube {
+  animation: rotate-cube 15s linear infinite;
+  animation-delay: 2s;
 }
-#cube:hover { animation: none; }
+#cube:hover, .playing #cube { animation: none; }
 
 section {
-	position: relative;
-	transition: all 600ms;
-	top: 15px;
-	left: 15px;
-	height: 600px;
-	width: 600px;
-	border: 1px solid;
+  position: relative;
+  transition: all 600ms;
+  top: 15px;
+  left: 15px;
+  height: 600px;
+  width: 600px;
+  border: 1px solid;
 }
 
-#intro { 
-	background-color: rgb(240, 130, 130);
-	background-color: rgba(240, 130, 130, 0.93); 
+#intro {
+  background-color: rgb(240, 130, 130);
+  background-color: rgba(240, 130, 130, 0.93);
 }
-#tuto1 { 
-	background-color: rgb(130, 240, 130);
-	background-color: rgba(130, 240, 130, 0.93); 
+#tuto1 {
+  background-color: rgb(130, 240, 130);
+  background-color: rgba(130, 240, 130, 0.93);
 }
-#tuto2 { 
-	background-color: rgb(130, 130, 240);
-	background-color: rgba(130, 130, 240, 0.93); 
+#tuto2 {
+  background-color: rgb(130, 130, 240);
+  background-color: rgba(130, 130, 240, 0.93);
 }
-#tuto3 { 
-	background-color: rgb(240, 240, 130);
-	background-color: rgba(240, 240, 130, 0.93); 
+#tuto3 {
+  background-color: rgb(240, 240, 130);
+  background-color: rgba(240, 240, 130, 0.93);
 }
-#about { 
-	background-color: rgb(240, 130, 240);
-	background-color: rgba(240, 130, 240, 0.93); 
+#about {
+  background-color: rgb(240, 130, 240);
+  background-color: rgba(240, 130, 240, 0.93);
 }
-#game  { 
-	background-color: rgb(130, 240, 240);
-	background-color: rgba(130, 240, 240, 0.93); 
+#game  {
+  background-color: rgb(130, 240, 240);
+  background-color: rgba(130, 240, 240, 0.93);
 }
-#gameboard  { 
-	opacity: 0;
-	color: white;
-	border: 0;
-	background-color: rgb(0, 0, 0);
-	background-color: rgba(0, 0, 0, 0.93); 
+#gameboard  {
+  opacity: 0;
+  color: white;
+  border: 0;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.93);
 }
 
 #cube.rotate-intro { transform: translateZ(-300px) rotateY(0Deg); }
@@ -142,56 +148,56 @@ section { position: absolute; }
 #game { transform: translateY(-300px) rotateX(90Deg); }
 #gameboard { transform: translateY(250px) rotateX(90Deg); }
 /*
-:hover > #intro 	{ transform: translateZ(250px); }
-:hover > #tuto1	{ transform: translateX(250px) rotateY(90Deg); }
-:hover > #tuto2	 { transform: translateZ(-250px) rotateY(180Deg); }
-:hover > #tuto3	  { transform: translateX(-250px) rotateY(-90Deg); }
+:hover > #intro   { transform: translateZ(250px); }
+:hover > #tuto1 { transform: translateX(250px) rotateY(90Deg); }
+:hover > #tuto2  { transform: translateZ(-250px) rotateY(180Deg); }
+:hover > #tuto3   { transform: translateX(-250px) rotateY(-90Deg); }
 :hover > #about { transform: translateY(250px) rotateX(-90Deg); }
-:hover > #game	 { transform: translateY(-250px) rotateX(90Deg); }*/
+:hover > #game   { transform: translateY(-250px) rotateX(90Deg); }*/
 
 
 a {
-	text-align: center;
-	border-radius: 5px;
-	color: black;
-	line-height: 1em;
-	text-decoration: none;
-	background-color:rgb(255,255,255);
-	background-color:rgba(255,255,255,0.2);
-	padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  color: black;
+  line-height: 1em;
+  text-decoration: none;
+  background-color:rgb(255,255,255);
+  background-color:rgba(255,255,255,0.2);
+  padding: 5px;
 }
 
 .up, .down, .left, .right {
-	position: absolute;
+  position: absolute;
 }
-.up, .down { 
-	width: 50%;
-	left: 25%;
+.up, .down {
+  width: 50%;
+  left: 25%;
 }
 .left, .right {
-	top: 25%;
-	width: 15px;   
-	height: 300px;
-    word-wrap: break-word;  
+  top: 25%;
+  width: 15px;
+  height: 300px;
+    word-wrap: break-word;
     letter-spacing: 10px;
 }
-.up 	{ top: 5px; }
-.down 	{ bottom: 5px; }
-.right 	{ right: 5px; }
-.left 	{ left: 5px; }
+.up   { top: 5px; }
+.down   { bottom: 5px; }
+.right  { right: 5px; }
+.left   { left: 5px; }
 
 
 .playing #game {
-	opacity: 0;
-	transform: translateY(250px) rotateX(90Deg);
+  opacity: 0;
+  transform: translateY(250px) rotateX(90Deg);
 }
 .playing #gameboard {
-	transform: translateY(-260px) rotateX(90Deg); 
-	opacity: 1;
+  transform: translateY(-260px) rotateX(90Deg);
+  opacity: 1;
 }
 #playbutton {
-	opacity: 1;
+  opacity: 1;
 }
 .playing #playbutton {
-	opacity: 0;
+  opacity: 0;
 }

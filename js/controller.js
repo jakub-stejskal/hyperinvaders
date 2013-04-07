@@ -1,5 +1,6 @@
-var Controller = function(pubsub, binding) {
+var Controller = function(pubsub, element, binding) {
   this.pubsub = pubsub;
+  element = element || window;
   this._pressed = {};
   this.binding = binding || {
     player: {
@@ -13,8 +14,8 @@ var Controller = function(pubsub, binding) {
   };
 
   var controller = this;
-  window.addEventListener('keyup', function(event) { controller.onKeyup(event); }, false);
-  window.addEventListener('keydown', function(event) { controller.onKeydown(event); }, false);
+  element.addEventListener('keyup', function(event) { controller.onKeyup(event); }, false);
+  element.addEventListener('keydown', function(event) { controller.onKeydown(event); }, false);
 };
 
 Controller.prototype.isDown = function(keyCode) {

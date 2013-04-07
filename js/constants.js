@@ -1,8 +1,8 @@
 var Constants = {};
 
 Constants.unit = 32;
-Constants.width = 640;
-Constants.height = 480;
+Constants.width = 600;
+Constants.height = 600;
 Constants.leftBoundary = 2 * Constants.unit;
 Constants.rightBoundary = Constants.width - 2 * Constants.unit;
 Constants.bottomBoundary = Constants.height - 1 * Constants.unit;

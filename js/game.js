@@ -6,7 +6,7 @@
     this.view.display();
 
     this.level = "first";
-    this.paused = false;
+    this.paused = true;
 
     this.pubsub.subscribe(Events.SHOT, function (projectile) {
       this.entities.projectiles.push(projectile);
@@ -69,14 +69,6 @@
       if (loops) this.view.draw();
     };
   })();
-
-  Game.prototype.pause = function() {
-    this.paused = true;
-  };
-
-  Game.prototype.unpause = function() {
-    this.paused = false;
-  };
 
   Game.prototype.update = function() {
     if (!this.paused) {

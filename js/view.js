@@ -1,7 +1,7 @@
-var View = function(element, width, height, drawMode) {
+var View = function(element, drawMode) {
 	this.element = element || document.body;
-	this.width = width || Constants.width;
-	this.height = height || Constants.height;
+	this.width = Constants.width;
+	this.height = Constants.height;
 	this.drawFunction = this.createDrawFunction(drawMode || "squares");
 };
 

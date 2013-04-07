@@ -1,6 +1,7 @@
 var Loader = {
   game: [
   "components/pubsubjs/pubsub.js",
+
   "js/events.js",
   "js/constants.js",
   "js/key.js",
@@ -33,14 +34,12 @@ var Loader = {
 yepnope([{
   load: Loader.game,
   complete: function () {
+    var element = $("#gameboard")[0];
     Loader.pubsub = Pubsub.create();
-
     Loader.controller = new Controller(Loader.pubsub);
     Loader.sound = new Sound(Loader.pubsub);
-    var view = new View(undefined, undefined, undefined, "chars");
+    var view = new View(element, "chars");
     var game = new Game(Loader.pubsub, view);
-    game.start()
-;    g = game; // NOTE: Debug var, remove
   }
 },
 {
