@@ -1,6 +1,4 @@
 var Loader = {
-  gameInstance: null,
-
   game: [
   "components/pubsubjs/pubsub.js",
   "js/events.js",
@@ -13,6 +11,7 @@ var Loader = {
   "js/entities/projectile.js",
   "js/commander.js",
   "js/levels.js",
+  "js/controller.js",
   "js/view.js",
   "js/sound.js",
   "js/game.js"
@@ -34,10 +33,14 @@ var Loader = {
 yepnope([{
   load: Loader.game,
   complete: function () {
+    Loader.pubsub = Pubsub.create();
+
+    Loader.controller = new Controller(Loader.pubsub);
+    Loader.sound = new Sound(Loader.pubsub);
     var view = new View(undefined, undefined, undefined, "chars");
-    Loader.gameInstance = new Game(view);
-    Loader.gameInstance.start();
-    Loader.gameInstance.pubsub.subscribe("hyperinvaders", function(e) {console.log(e);});
+    var game = new Game(Loader.pubsub, view);
+    game.start()
+;    g = game; // NOTE: Debug var, remove
   }
 },
 {
@@ -47,7 +50,7 @@ yepnope([{
       soundfontUrl: "components/midijs/soundfont/",
       instrument: "acoustic_grand_piano",
       callback: function() {
-        Loader.gameInstance.sound.setState("play");
+        Loader.sound.start(Loader.pubsub);
       }
     });
   }

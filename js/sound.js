@@ -1,29 +1,20 @@
-var Sound = function (pubsub) {
-  this.state = "loading";
+var Sound = function () {
   this.playing = false;
-  this.pubsub = pubsub;
 };
 
-Sound.prototype.setState = function(state) {
-  if (state == "play") {
-    this.start();
-  }
-  else if (state == "mute") {
-    this.stop();
-  }
-};
-
-Sound.prototype.start = function() {
+Sound.prototype.start = function(pubsub) {
   this.playing = true;
   MIDI.setVolume(0, 127);
 
-  this.pubsub.subscribe(Events.BEAT, this.playBeat.bind(this));
-  this.pubsub.subscribe(Events.EXPLOSION, this.playBeat.bind(this));
-  this.pubsub.subscribe(Events.SHOT, this.playShot.bind(this));
-};
+  pubsub.subscribe(Events.BEAT, this.playBeat.bind(this));
+  pubsub.subscribe(Events.EXPLOSION, this.playBeat.bind(this));
+  pubsub.subscribe(Events.SHOT, this.playShot.bind(this));
+  pubsub.subscribe(Events.VICTORY, this.playVictory.bind(this));
+  pubsub.subscribe(Events.DEFEAT, this.playDefeat.bind(this));
 
-Sound.prototype.stop = function() {
-  this.playing = false;
+  pubsub.subscribe(Events.INPUT.MUTE, function (isDown) {
+    if (isDown) this.playing = !this.playing;
+  }.bind(this));
 };
 
 Sound.prototype.playBeat = function(beat) {

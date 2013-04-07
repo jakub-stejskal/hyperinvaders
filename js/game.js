@@ -1,33 +1,36 @@
-  var Game = function(view) {
-    this.pubsub = Pubsub.create();
+  var Game = function(pubsub, view) {
+    this.pubsub = pubsub;
 
     this.view = view || new View();
     this.view.game = this;
     this.view.display();
 
-    this.sound = new Sound(this.pubsub);
+    this.level = "first";
+    this.paused = false;
 
+    this.pubsub.subscribe(Events.SHOT, function (projectile) {
+      this.entities.projectiles.push(projectile);
+    }.bind(this));
+    this.pubsub.subscribe(Events.INPUT.PAUSE, function (isDown) {
+      if (isDown) this.paused = !this.paused;
+    }.bind(this));
+    this.pubsub.subscribe(Events.INPUT.RESET, function (isDown) {
+      if (isDown) this.start();
+    }.bind(this));
+  };
+
+  Game.prototype.start = function() {
     this.entities = {
       players: [],
       enemies: [],
       projectiles: []
     };
 
-    this.commander = null;
-
-    this.level = "first";
-    this.paused = false;
-  };
-
-  Game.prototype.start = function() {
     this.entities.players.push(new Player().init(this.pubsub));
     this.entities.enemies = Levels.initializeEnemies(this.level, this.pubsub);
     this.commander = new Commander(this.entities.enemies, this).init(this.pubsub);
 
-    this.pubsub.subscribe(Events.SHOT, function (projectile) {
-      console.log("Projectile!");
-      this.entities.projectiles.push(projectile);
-    }.bind(this));
+    this.paused = false;
 
     this._onEachFrame(Game.prototype.run);
   };
@@ -85,7 +88,7 @@
   };
 
   Game.prototype.forEachOf = function (list, fn) {
-    for (var i = list.length - 1; i >= 0; i--) {
+    for (var i = 0; i < list.length; i++) {
       if (list[i].destroyed) {
         list.splice(i, 1);
       }
@@ -112,12 +115,12 @@
 
   Game.prototype.handleVictory = function() {
     this.paused = true;
-    this.sound.playVictory();
+    this.pubsub.publish(Events.VICTORY);
     console.log("Game won.");
   };
 
   Game.prototype.handleDefeat = function() {
     this.paused = true;
-    this.sound.playDefeat();
+    this.pubsub.publish(Events.DEFEAT);
     console.log("Game lost.");
   };
