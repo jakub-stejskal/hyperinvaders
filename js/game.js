@@ -14,9 +14,12 @@
     }.bind(this));
     this.pubsub.subscribe(Events.INPUT.PAUSE, function (isDown) {
       if (isDown) this.paused = !this.paused;
+      window.location.hash = this.paused ? "game" :"play";
+      // TODO start game on "Play game" click
     }.bind(this));
     this.pubsub.subscribe(Events.INPUT.RESET, function (isDown) {
       if (isDown) this.start();
+      window.location.hash = "play";
     }.bind(this));
   };
 
@@ -42,7 +45,7 @@
     if (requestAnimationFrame) {
       return function(callback) {
         var caller = this;
-        var _cb = function() { callback.call(caller); requestAnimationFrame(_cb); };
+        var _cb = function() { if (!this.paused) callback.call(caller); requestAnimationFrame(_cb); };
         _cb();
       };
     } else {
