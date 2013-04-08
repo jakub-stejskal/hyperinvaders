@@ -50,6 +50,15 @@ View.prototype.drawChars = function(x, y, width, height, chars) {
 	this.context.fillStyle = "white";
 	this.context.textAlign = "center";
 	this.context.textBaseline = "middle";
-	this.context.font = 32 + 'px Invaders';//"Invaders";
+	this.context.font = 32 + 'px Invaders';
   this.context.fillText(chars, x + width / 2, y + height / 2);
+};
+
+View.prototype.writeText = function(text, x, y) {
+	x = x || this.width / 2;
+	y = y || this.height / 2;
+	this.context.fillStyle = "white";
+	this.context.textAlign = "center";
+	this.context.font = 32 + 'px Geo';
+	this.context.fillText(text, x, y);
 };

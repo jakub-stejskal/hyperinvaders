@@ -4,6 +4,7 @@
     this.view = view || new View();
     this.view.game = this;
     this.view.display();
+    this.view.writeText(Texts.START);
 
     this.level = "first";
     this.paused = true;
@@ -66,7 +67,7 @@
         loops++;
       }
 
-      if (loops) this.view.draw();
+      if (loops && !this.paused) this.view.draw();
     };
   })();
 
@@ -107,12 +108,12 @@
 
   Game.prototype.handleVictory = function() {
     this.paused = true;
+    this.view.writeText(Texts.VICTORY);
     this.pubsub.publish(Events.VICTORY);
-    console.log("Game won.");
   };
 
   Game.prototype.handleDefeat = function() {
     this.paused = true;
+    this.view.writeText(Texts.DEFEAT);
     this.pubsub.publish(Events.DEFEAT);
-    console.log("Game lost.");
   };

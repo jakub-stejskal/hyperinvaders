@@ -4,6 +4,7 @@ var Loader = {
 
   "js/events.js",
   "js/constants.js",
+  "js/texts.js",
   "js/key.js",
   "js/entities/entity.js",
   "js/entities/shooter.js",
