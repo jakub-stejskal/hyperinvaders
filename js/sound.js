@@ -37,10 +37,11 @@ Sound.prototype.playExplosion = function(hostile) {
 };
 
 Sound.prototype.playVictory = function() {
-    this.playNote(50, 127, 1);
-    this.playNote(54, 127, 1);
-    this.playNote(57, 127, 1);
-    this.playNote(61, 127, 1);
+    this.playNote(50, 127, 1, 0);
+    this.playNote(54, 127, 1, 0.1);
+    this.playNote(57, 127, 1, 0.2);
+    this.playNote(62, 127, 1, 0.3);
+    this.playNote(66, 127, 1, 0.4);
 };
 
 Sound.prototype.playDefeat = function() {
@@ -49,9 +50,10 @@ Sound.prototype.playDefeat = function() {
   this.playNote(42, 127, 1);
 };
 
-Sound.prototype.playNote = function(note, velocity, time) {
+Sound.prototype.playNote = function(note, velocity, time, delay) {
+  delay = delay || 0;
   if (this.playing) {
-    MIDI.noteOn(0, note, velocity, 0);
-    MIDI.noteOff(0, note, time);
+    MIDI.noteOn(0, note, velocity, delay);
+    MIDI.noteOff(0, note, time + delay);
   }
 };
