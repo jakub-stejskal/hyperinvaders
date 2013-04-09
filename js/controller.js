@@ -1,17 +1,8 @@
-var Controller = function(pubsub, element, binding) {
+var Controller = function(pubsub, keybinding, element) {
   this.pubsub = pubsub;
   element = element || window;
   this._pressed = {};
-  this.binding = binding || {
-    player: {
-      LEFT: 37,
-      RIGHT: 39,
-      SHOOT: 38
-    },
-    PAUSE: 80,
-    MUTE: 77,
-    RESET: 82
-  };
+  this.keybinding = keybinding;
 
   var controller = this;
   element.addEventListener('keyup', function(event) { controller.onKeyup(event); }, false);
@@ -36,12 +27,12 @@ Controller.prototype.onKeyup = function(event) {
 
 Controller.prototype.onKeypress = function(code, isDown) {
   switch (code) {
-    case this.binding.player.LEFT: this.pubsub.publish(Events.INPUT.LEFT, isDown); break;
-    case this.binding.player.RIGHT: this.pubsub.publish(Events.INPUT.RIGHT, isDown); break;
-    case this.binding.player.SHOOT: this.pubsub.publish(Events.INPUT.SHOOT, isDown); break;
-    case this.binding.MUTE: this.pubsub.publish(Events.INPUT.MUTE, isDown); break;
-    case this.binding.PAUSE: this.pubsub.publish(Events.INPUT.PAUSE, isDown); break;
-    case this.binding.RESET: this.pubsub.publish(Events.INPUT.RESET, isDown); break;
+    case this.keybinding.player.LEFT: this.pubsub.publish(Events.INPUT.LEFT, isDown); break;
+    case this.keybinding.player.RIGHT: this.pubsub.publish(Events.INPUT.RIGHT, isDown); break;
+    case this.keybinding.player.SHOOT: this.pubsub.publish(Events.INPUT.SHOOT, isDown); break;
+    case this.keybinding.MUTE: this.pubsub.publish(Events.INPUT.MUTE, isDown); break;
+    case this.keybinding.PAUSE: this.pubsub.publish(Events.INPUT.PAUSE, isDown); break;
+    case this.keybinding.RESET: this.pubsub.publish(Events.INPUT.RESET, isDown); break;
   }
 };
 

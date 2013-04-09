@@ -42,11 +42,41 @@ h1 {
 h2 {
   font-size: 2em;
   margin: 50px 0 50px;
-  text-shadow: 0 5px 5px rgba(0,0,0,.25);
+  text-shadow: 3px 5px 5px rgba(0,0,0,.25);
 }
 p {
   margin: 20px;
 }
+form {
+  padding: 0 20%;
+  text-align: left;
+}
+input, label {
+  padding: 0.5em;
+  width: 40%;
+}
+input {
+  background-color: black;
+  background-color: rgba(0,0,0,0.1);
+  border: 0;
+  box-shadow: inset 3px 5px 5px rgba(0,0,0,0.25);
+  font: 1em Geo;
+  text-align: center;
+}
+input:focus, input:active {
+  outline: none;
+  background-color: white;
+  background-color: rgba(255,255,255,0.1);
+}
+label {
+  display: block;
+  text-align: right;
+  float:left;
+}
+input + span {
+  padding: 0.5em;
+}
+
 
 .screen-centered
 {
@@ -84,7 +114,7 @@ p {
 }
 
 #cube {
-  animation: rotate-cube 15s linear infinite;
+  /*animation: rotate-cube 15s linear infinite;*/
   animation-delay: 2s;
 }
 #cube:hover, .playing #cube { animation: none; }
@@ -103,19 +133,19 @@ section {
   background-color: rgb(240, 130, 130);
   background-color: rgba(240, 130, 130, 0.93);
 }
-#tuto1 {
+#about1 {
   background-color: rgb(130, 240, 130);
   background-color: rgba(130, 240, 130, 0.93);
 }
-#tuto2 {
+#about2 {
   background-color: rgb(130, 130, 240);
   background-color: rgba(130, 130, 240, 0.93);
 }
-#tuto3 {
+#about3 {
   background-color: rgb(240, 240, 130);
   background-color: rgba(240, 240, 130, 0.93);
 }
-#about {
+#setup {
   background-color: rgb(240, 130, 240);
   background-color: rgba(240, 130, 240, 0.93);
 }
@@ -130,29 +160,32 @@ section {
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.93);
 }
+.playing #gameboard canvas {
+  cursor:none;
+}
 
 #cube.rotate-intro { transform: translateZ(-300px) rotateY(0Deg); }
-#cube.rotate-tuto1 { transform: translateZ(-300px) rotateY(-90Deg); }
-#cube.rotate-tuto2 { transform: translateZ(-300px) rotateY(-180Deg); }
-#cube.rotate-tuto3 { transform: translateZ(-300px) rotateY(-270Deg); }
-#cube.rotate-about { transform: translateZ(-300px) rotateX(90Deg); }
+#cube.rotate-about1 { transform: translateZ(-300px) rotateY(-90Deg); }
+#cube.rotate-about2 { transform: translateZ(-300px) rotateY(-180Deg); }
+#cube.rotate-about3 { transform: translateZ(-300px) rotateY(-270Deg); }
+#cube.rotate-setup { transform: translateZ(-300px) rotateX(90Deg); }
 #cube.rotate-game { transform: translateZ(-300px) rotateX(-90Deg); }
 
 nav {text-align: center;}
 section { position: absolute; }
 #intro { transform: translateZ(300px); }
-#tuto1 { transform: translateX(300px) rotateY(90Deg); }
-#tuto2 { transform: translateZ(-300px) rotateY(180Deg); }
-#tuto3 { transform: translateX(-300px) rotateY(-90Deg); }
-#about { transform: translateY(300px) rotateX(-90Deg); }
+#about1 { transform: translateX(300px) rotateY(90Deg); }
+#about2 { transform: translateZ(-300px) rotateY(180Deg); }
+#about3 { transform: translateX(-300px) rotateY(-90Deg); }
+#setup { transform: translateY(300px) rotateX(-90Deg); }
 #game { transform: translateY(-300px) rotateX(90Deg); }
 #gameboard { transform: translateY(250px) rotateX(90Deg); }
 /*
 :hover > #intro   { transform: translateZ(250px); }
-:hover > #tuto1 { transform: translateX(250px) rotateY(90Deg); }
-:hover > #tuto2  { transform: translateZ(-250px) rotateY(180Deg); }
-:hover > #tuto3   { transform: translateX(-250px) rotateY(-90Deg); }
-:hover > #about { transform: translateY(250px) rotateX(-90Deg); }
+:hover > #about1 { transform: translateX(250px) rotateY(90Deg); }
+:hover > #about2  { transform: translateZ(-250px) rotateY(180Deg); }
+:hover > #about3   { transform: translateX(-250px) rotateY(-90Deg); }
+:hover > #setup { transform: translateY(250px) rotateX(-90Deg); }
 :hover > #game   { transform: translateY(-250px) rotateX(90Deg); }*/
 
 

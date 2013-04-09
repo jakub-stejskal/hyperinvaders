@@ -1,5 +1,5 @@
 var View = function(element, drawMode) {
-	this.element = element || document.body;
+	this.element = element || $("body");
 	this.width = Constants.width;
 	this.height = Constants.height;
 	this.drawFunction = this.createDrawFunction(drawMode || "squares");
@@ -12,7 +12,7 @@ View.prototype.display = function() {
 
 	this.context = this.canvas.getContext("2d");
 
-	this.element.appendChild(this.canvas);
+	this.element.append(this.canvas);
 };
 
 View.prototype.createDrawFunction = function(drawMode) {

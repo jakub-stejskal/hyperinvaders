@@ -1,5 +1,5 @@
 var Loader = {
-  game: [
+  gameDeps: [
   "components/pubsubjs/pubsub.js",
 
   "js/events.js",
@@ -16,10 +16,11 @@ var Loader = {
   "js/controller.js",
   "js/view.js",
   "js/sound.js",
-  "js/game.js"
+  "js/game.js",
+  "js/settings.js"
   ],
 
-  sound: [
+  soundDeps: [
   "components/midijs/js/MIDI/AudioDetect.js",
   "components/midijs/js/MIDI/LoadPlugin.js",
   "components/midijs/js/MIDI/Plugin.js",
@@ -33,18 +34,20 @@ var Loader = {
 };
 
 yepnope([{
-  load: Loader.game,
+  load: Loader.gameDeps,
   complete: function () {
-    var element = $("#gameboard")[0];
+    var element = $("#gameboard");
     Loader.pubsub = Pubsub.create();
-    Loader.controller = new Controller(Loader.pubsub);
     Loader.sound = new Sound(Loader.pubsub);
-    var view = new View(element, "chars");
-    var game = new Game(Loader.pubsub, view);
+    Loader.view = new View(element, "chars");
+    Loader.game = new Game(Loader.pubsub, Loader.view);
+    Loader.controller = new Controller(Loader.pubsub);
+    Loader.settings = new Settings(Loader.game, Loader.controller);
+    Loader.settings.apply();
   }
 },
 {
-  load: Loader.sound,
+  load: Loader.soundDeps,
   complete: function () {
     MIDI.loadPlugin({
       soundfontUrl: "components/midijs/soundfont/",
