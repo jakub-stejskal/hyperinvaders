@@ -26,7 +26,8 @@ js/entities/projectile.js
 js/commander.js
 js/levels.js
 js/controller.js
-js/view.js
+js/svgView.js
+js/canvasView.js
 js/sound.js
 js/game.js
 js/settings.js
