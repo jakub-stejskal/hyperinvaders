@@ -20,7 +20,6 @@ Entity.prototype.init = function(pubsub) {
 };
 
 Entity.prototype.getAppearence = function(mode) {
-  // console.log(mode, this.appearenceIndex, this[mode], this[mode] - 1, this[mode][this.appearenceIndex % (this[mode].length - 1]);
   switch (this.state) {
     case 'ok': return this[mode][this.appearenceIndex % (this[mode].length - 1)];
     case 'destroyed': return this[mode][this[mode].length - 1];
@@ -38,19 +37,23 @@ Entity.prototype.getId = function() {
 }();
 
 Entity.prototype.moveLeft = function() {
-  this.x -= this.horizontalStep;
+  if (this.state == 'ok')
+    this.x -= this.horizontalStep;
 };
 
 Entity.prototype.moveRight = function() {
-  this.x += this.horizontalStep;
+  if (this.state == 'ok')
+    this.x += this.horizontalStep;
 };
 
 Entity.prototype.moveUp = function() {
-  this.y -= this.verticalStep;
+  if (this.state == 'ok')
+    this.y -= this.verticalStep;
 };
 
 Entity.prototype.moveDown = function() {
-  this.y += this.verticalStep;
+  if (this.state == 'ok')
+    this.y += this.verticalStep;
 };
 
 Entity.prototype.top = function() { return this.y; };
@@ -69,14 +72,11 @@ Entity.prototype.update = function(game) {
       case 'ok': break;
       case 'destroyed':
         this.state = 'disposing';
-        // console.log("Update %o -> %o, %o", oldState, this.state, this);
-        this.stateExpiration = Constants.fps; break;
+        this.stateExpiration = 5; break;
       case 'disposing':
         this.state = 'disposed';
-        // console.log("Update %o -> %o, %o", oldState, this.state, this);
-        this.stateExpiration = Constants.fps; break;
+        this.stateExpiration = 5; break;
       case 'disposed':
-        // console.log("Update %o -> %o, %o", oldState, this.state, this);
         break;
     }
   }
@@ -84,7 +84,7 @@ Entity.prototype.update = function(game) {
 
 Entity.prototype.destroy = function() {
   this.state = 'destroyed';
-  this.stateExpiration = Constants.fps;
+  this.stateExpiration = Constants.fps / 2;
 };
 
 Entity.prototype.isOutOfBounds = function() {
