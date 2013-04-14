@@ -1,6 +1,6 @@
-var Sound = function () {
+function Sound() {
   this.playing = false;
-};
+}
 
 Sound.prototype.start = function(pubsub) {
   this.playing = true;

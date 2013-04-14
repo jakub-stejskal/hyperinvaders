@@ -1,4 +1,4 @@
-var Commander = function (invaders, game) {
+function Commander(invaders, game) {
   this.invaders = invaders;
   this.invasionSize = this.invaders.length;
   this.game = game;
@@ -9,7 +9,7 @@ var Commander = function (invaders, game) {
   this.beat = 0;
   this.shootTime = 0;
   this.maneuver = "turnRight";
-};
+}
 
 Commander.prototype.init = function(pubsub) {
   this.publishBeat = function (beat) {

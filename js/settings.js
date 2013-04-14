@@ -1,4 +1,4 @@
-var Settings = function (game, controller) {
+function Settings(game, controller) {
   this.game = game;
   this.controller = controller;
 
@@ -11,7 +11,7 @@ var Settings = function (game, controller) {
 
   this.loadFromStorage();
   this.bind();
-};
+}
 
 Settings.prototype.loadFromStorage = function() {
   if (localStorage.keybinding != "undefined") {
@@ -22,7 +22,6 @@ Settings.prototype.loadFromStorage = function() {
   }
 
   for (var key in this.inputs) {
-    console.log(key, ",", this.inputs[key].text(), "," ,this.keybinding.player[key.toUpperCase()]);
     var keyname = this.keyCodeMap[this.keybinding.player[key.toUpperCase()]];
     this.inputs[key].val(keyname);
   }

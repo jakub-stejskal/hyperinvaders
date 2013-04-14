@@ -1,4 +1,4 @@
-var Controller = function(pubsub, keybinding, element) {
+function Controller(pubsub, keybinding, element) {
   this.pubsub = pubsub;
   element = element || window;
   this._pressed = {};
@@ -7,7 +7,7 @@ var Controller = function(pubsub, keybinding, element) {
   var controller = this;
   element.addEventListener('keyup', function(event) { controller.onKeyup(event); }, false);
   element.addEventListener('keydown', function(event) { controller.onKeydown(event); }, false);
-};
+}
 
 Controller.prototype.isDown = function(keyCode) {
   return this._pressed[keyCode];

@@ -1,4 +1,4 @@
-var Player = function() {
+function Player() {
   this.horizontalStep = 2;
 
   this.color = ["#0F0", "#565"];
@@ -10,7 +10,7 @@ var Player = function() {
   this.movingLeft = false;
   this.movingRight = false;
   this.shooting = false;
-};
+}
 
 Player.prototype = new Shooter(false);
 
