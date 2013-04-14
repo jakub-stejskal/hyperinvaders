@@ -19,6 +19,7 @@ Player.prototype.init = function(pubsub) {
 
   this.pubsub.subscribe(Events.INPUT.SHOOT, function (isDown) {
     this.shooting = isDown;
+
   }.bind(this));
   this.pubsub.subscribe(Events.INPUT.LEFT, function (isDown) {
     this.movingLeft = isDown;
@@ -31,12 +32,8 @@ Player.prototype.init = function(pubsub) {
 };
 
 Player.prototype.update = function(game) {
-  if (this.shooting) {
-    this.shouldShoot = true;
-  }
-
   Shooter.prototype.update.call(this, game);
-
+  this.shouldShoot = this.shooting;
   if (this.movingLeft) this.moveLeft();
   if (this.movingRight) this.moveRight();
 };
