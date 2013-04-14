@@ -1,0 +1,40 @@
+CACHE MANIFEST
+# rev 4
+
+FALLBACK:
+js/soundloader.js js/empty.js
+
+NETWORK:
+*
+
+CACHE:
+components/jquery/jquery.min.js
+components/prefix-free/prefixfree.min.js
+components/yepnope/yepnope.1.5.4-min.js
+components/pubsubjs/pubsub.js
+
+js/loader.js
+js/navigation.js
+js/events.js
+js/constants.js
+js/texts.js
+js/entities/entity.js
+js/entities/shooter.js
+js/entities/player.js
+js/entities/enemy.js
+js/entities/projectile.js
+js/commander.js
+js/levels.js
+js/controller.js
+js/view.js
+js/sound.js
+js/game.js
+js/settings.js
+
+stylesheet.css
+
+fonts/entypo.ttf
+fonts/entypo.woff
+fonts/pixel_invaders.ttf
+
+
