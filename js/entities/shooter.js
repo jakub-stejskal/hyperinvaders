@@ -1,12 +1,14 @@
-var Shooter = function(hostile) {
+function Shooter(hostile) {
   this.hostile = hostile;
   this.cooldown = 0;
   this.shouldShoot = false;
-};
+}
 
 Shooter.prototype = new Entity();
 
 Shooter.prototype.update = function(game) {
+  Entity.prototype.update.call(this, game);
+
   if (this.cooldown > 0) {
     this.cooldown--;
   }

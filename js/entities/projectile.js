@@ -1,4 +1,4 @@
-var Projectile = function(hostile, x, y) {
+function Projectile(hostile, x, y) {
   this.hostile = hostile;
   this.width = 2;
   this.height = 0.5 * Constants.unit;
@@ -6,8 +6,8 @@ var Projectile = function(hostile, x, y) {
   if (hostile) {
     this.verticalStep  = 5;
 
-    this.color = ["#0FF"];
-    this.chars = ["*"];
+    this.color = ["#0FF", ""];
+    this.chars = ["*", ""];
 
     this.x = x;
     this.y = y + this.height;
@@ -15,18 +15,20 @@ var Projectile = function(hostile, x, y) {
   else {
     this.verticalStep = 10;
 
-    this.color = ["#F90"];
-    this.chars = ["|"];
+    this.color = ["#F90", ""];
+    this.chars = ["|", ""];
 
     this.x = x;
     this.y = y;
   }
-};
+}
 
 Projectile.prototype = new Entity();
 
 Projectile.prototype.update = function(game) {
-  if (this.isOutOfBounds()) {
+  Entity.prototype.update.call(this, game);
+
+  if (this.state == 'ok' && this.isOutOfBounds()) {
     this.destroy();
   }
 
@@ -43,13 +45,16 @@ Projectile.prototype.update = function(game) {
 };
 
 Projectile.prototype.handleCollisionsWith = function(targets) {
-  for (var i = targets.length - 1; i >= 0; i--) {
-    var target = targets[i];
-    if (this.right() > target.left() && this.left() < target.right() &&
-      this.top() < target.bottom() && this.bottom() > target.top()) {
-      this.destroy();
-      target.destroy();
-      this.pubsub.publish(Events.EXPLOSION, this.hostile);
+  if (this.state == 'ok') {
+    for (var i = targets.length - 1; i >= 0; i--) {
+      var target = targets[i];
+      if (target.state == 'ok' &&
+        this.right() > target.left() && this.left() < target.right() &&
+        this.top() < target.bottom() && this.bottom() > target.top()) {
+        this.destroy();
+        target.destroy();
+        this.pubsub.publish(Events.EXPLOSION, this.hostile);
+      }
     }
   }
 };

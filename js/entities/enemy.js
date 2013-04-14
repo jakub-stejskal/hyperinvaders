@@ -1,13 +1,13 @@
-var Enemy = function(x, y) {
+function Enemy(x, y) {
   this.horizontalStep = 0.25 * Constants.unit;
   this.verticalStep = 0.25 * Constants.unit;
 
-  this.color = ["#F00", "#900"];
-  this.chars = ["A","G"];
+  this.color = ["#F00", "#900","#999"];
+  this.chars = ["A","G","S"];
 
   this.x = (x || 0) * 1.2 * Constants.unit;
   this.y = (y || 0) * Constants.unit;
-};
+}
 
 Enemy.prototype = new Shooter(true);
 
