@@ -1,0 +1,103 @@
+.screen-centered
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    margin-top: -20px;
+}
+
+@keyframes rotate-cube {
+  from {  transform: translateZ(-1000px) rotateZ(0Deg) rotateY(0Deg);}
+  to{ transform: translateZ(-1000px) rotateZ(1080Deg) rotateY(360Deg);}
+}
+
+.stage {
+  perspective: 700px;
+  transform-style: preserve-3d;
+  position: absolute;
+}
+
+#cube {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  top: 50%;
+  left: 50%;
+  margin-top: -300px;
+  margin-left: -300px;
+  transform-style: preserve-3d;
+  transition: all 700ms;
+  transform: translateZ(-300px);
+}
+
+#cube {
+  /*animation: rotate-cube 15s linear infinite;*/
+  animation-delay: 2s;
+}
+#cube:hover, .playing #cube { animation: none; }
+
+section {
+  top: 15px;
+  left: 15px;
+  height: 600px;
+  width: 600px;
+}
+
+#play {
+    opacity: 0;
+}
+
+
+#cube.rotate-intro { transform: translateZ(-300px) rotateY(0Deg); }
+#cube.rotate-about1 { transform: translateZ(-300px) rotateY(-90Deg); }
+#cube.rotate-about2 { transform: translateZ(-300px) rotateY(-180Deg); }
+#cube.rotate-about3 { transform: translateZ(-300px) rotateY(-270Deg); }
+#cube.rotate-setup { transform: translateZ(-300px) rotateX(90Deg); }
+#cube.rotate-game { transform: translateZ(-300px) rotateX(-90Deg); }
+
+
+section { position: absolute; }
+#intro { transform: translateZ(300px); }
+#about1 { transform: translateX(300px) rotateY(90Deg); }
+#about2 { transform: translateZ(-300px) rotateY(180Deg); }
+#about3 { transform: translateX(-300px) rotateY(-90Deg); }
+#setup { transform: translateY(300px) rotateX(-90Deg); }
+#game { transform: translateY(-300px) rotateX(90Deg); }
+#play { transform: translateY(250px) rotateX(90Deg); }
+
+.up, .down, .left, .right {
+  position: absolute;
+}
+.up, .down {
+  width: 50%;
+  left: 25%;
+}
+.left, .right {
+  top: 25%;
+  width: 15px;
+  height: 300px;
+    word-wrap: break-word;
+    letter-spacing: 10px;
+}
+.up   { top: 5px; }
+.down   { bottom: 5px; }
+.right  { right: 5px; }
+.left   { left: 5px; }
+
+.playing #game {
+  opacity: 0;
+  transform: translateY(250px) rotateX(90Deg);
+}
+.playing #play {
+  transform: translateY(-260px) rotateX(90Deg);
+  opacity: 1;
+}
+#playbutton {
+  opacity: 1;
+}
+.playing #playbutton {
+  opacity: 0;
+}

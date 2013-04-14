@@ -1,0 +1,36 @@
+#cube {
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+}
+
+section {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#play  {
+  opacity: 0;
+  color: white;
+  border: 0;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.93);
+}
+.playing #play > * {
+  cursor:none;
+}
+
+nav {text-align: center;}
+
+a {
+  text-align: center;
+  border-radius: 5px;
+  color: black;
+  line-height: 1em;
+  text-decoration: none;
+  background-color:rgb(255,255,255);
+  background-color:rgba(255,255,255,0.2);
+  padding: 5px;
+}
+

@@ -24,7 +24,7 @@ var Loader = {
 yepnope([{
   load: Loader.gameDeps,
   complete: function () {
-    var element = $("#gameboard");
+    var element = $("#play");
     Loader.pubsub = Pubsub.create();
     Loader.sound = new Sound(Loader.pubsub);
     Loader.view = new CanvasView(element, "chars");
