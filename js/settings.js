@@ -8,13 +8,14 @@ function Settings(game, controller) {
     shoot: $("#setup input[name=shoot]")
   };
   this.saveButton = $("#setup input[name=save]");
+  this.saveButton.prop('disabled', true);
 
   this.loadFromStorage();
   this.bind();
 }
 
 Settings.prototype.loadFromStorage = function() {
-  if (localStorage.keybinding != "undefined") {
+  if (localStorage.keybinding !== undefined) {
     this.keybinding = JSON.parse(localStorage.keybinding);
   }
   else {
@@ -34,8 +35,15 @@ Settings.prototype.bind = function() {
     event.preventDefault();
     event.target.value = settings.keyCodeMap[event.which];
     settings.keybinding.player[event.target.name.toUpperCase()] = event.which;
+    if (settings.hasCollision(event.which)) {
+      settings.saveButton.prop('disabled', true);
+      $("#setup span").text("duplicate assignments");
+    }
+    else {
+      settings.saveButton.prop('disabled', false);
+      $("#setup span").text("");
+    }
     $(this).nextAll("input").first().focus();
-    $("#setup span").text("");
   };
 
   for (var key in this.inputs) {
@@ -46,6 +54,20 @@ Settings.prototype.bind = function() {
     event.preventDefault();
     this.save();
   }.bind(this));
+};
+
+Settings.prototype.hasCollision = function(keyCode) {
+  var codes = [];
+  for (var code in this.keybinding.player) {
+    if (codes.indexOf(this.keybinding.player[code]) == -1) {
+      codes.push(this.keybinding.player[code]);
+    }
+    else {
+      return true;
+    }
+  }
+  console.log(codes);
+  return false;
 };
 
 Settings.prototype.keyCodeMap = {
