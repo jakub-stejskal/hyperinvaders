@@ -10,11 +10,14 @@ function SvgView(element, drawMode) {
 
 SvgView.prototype.display = function() {
   this.canvas = document.createElementNS(this.ns, "svg");
-  // this.canvas = document.querySelector("svg");
   this.canvas.setAttribute("width", this.width + "px");
   this.canvas.setAttribute("height", this.height + "px");
 
-  this.element.append(this.canvas);
+  this.element.prepend(this.canvas);
+};
+
+SvgView.prototype.hide = function() {
+  this.element.remove(this.canvas);
 };
 
 SvgView.prototype.createDrawFunction = function(drawMode) {
@@ -82,6 +85,7 @@ SvgView.prototype.writeText = function(text, x, y) {
   shape.setAttribute("font-size", "32px");
   shape.setAttribute("font-family", "Geo");
   shape.setAttribute("fill", "white");
+  shape.setAttribute("text-anchor", "middle");
   shape.appendChild(document.createTextNode(text));
   this.canvas.appendChild(shape);
 };

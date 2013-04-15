@@ -12,7 +12,11 @@ CanvasView.prototype.display = function() {
 
 	this.context = this.canvas.getContext("2d");
 
-	this.element.append(this.canvas);
+	this.element.prepend(this.canvas);
+};
+
+CanvasView.prototype.hide = function() {
+  this.element.remove(this.canvas);
 };
 
 CanvasView.prototype.createDrawFunction = function(drawMode) {

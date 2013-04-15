@@ -5,7 +5,7 @@ function Player() {
   this.chars = ["Q", "R"];
 
   this.x = Constants.width / 2 - this.width;
-  this.y = Constants.height - this.height - 10;
+  this.y = Constants.height - this.height - 1 * Constants.unit;
 
   this.movingLeft = false;
   this.movingRight = false;

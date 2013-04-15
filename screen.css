@@ -37,13 +37,18 @@
   /*animation: rotate-cube 15s linear infinite;*/
   animation-delay: 2s;
 }
-#cube:hover, .playing #cube { animation: none; }
+#cube:hover, .playing #cube {
+  animation: none;
+}
 
 section {
   top: 15px;
   left: 15px;
   height: 600px;
   width: 600px;
+}
+p {
+  margin: 1em 3em;
 }
 
 #play {
@@ -79,8 +84,9 @@ section { position: absolute; }
   top: 25%;
   width: 15px;
   height: 300px;
-    word-wrap: break-word;
-    letter-spacing: 10px;
+  word-wrap: break-word;
+  white-space: normal;
+  letter-spacing: 10px;
 }
 .up   { top: 5px; }
 .down   { bottom: 5px; }
@@ -92,7 +98,7 @@ section { position: absolute; }
   transform: translateY(250px) rotateX(90Deg);
 }
 .playing #play {
-  transform: translateY(-260px) rotateX(90Deg);
+  transform: translateY(-290px) rotateX(90Deg);
   opacity: 1;
 }
 #playbutton {

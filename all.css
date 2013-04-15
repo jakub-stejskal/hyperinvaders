@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Geo);
+@import url(https://fonts.googleapis.com/css?family=Geo);
 
 @font-face{
   font-family:'Entypo';
@@ -45,7 +45,7 @@ h2 {
   text-shadow: 3px 5px 5px rgba(0,0,0,.25);
 }
 p {
-  margin: 2em;
+  margin: 1em 1em;
 }
 form {
   padding: 0 20%;
@@ -56,7 +56,7 @@ input, label {
   width: 40%;
 }
 input {
-  background-color: black;
+  background-color: gray;
   background-color: rgba(0,0,0,0.1);
   border: 0;
   box-shadow: inset 3px 5px 5px rgba(0,0,0,0.25);
@@ -75,6 +75,11 @@ label {
 }
 input + span {
   padding: 0.5em;
+}
+input[disabled] {
+  color: rgb(0,0,0);
+  color: rgba(0,0,0,0.25);
+  opacity: 0.5;
 }
 
 section {
@@ -128,4 +133,5 @@ a {
   background-color:rgb(255,255,255);
   background-color:rgba(255,255,255,0.2);
   padding: 5px;
+  white-space: nowrap;
 }

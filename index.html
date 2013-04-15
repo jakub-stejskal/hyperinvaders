@@ -3,11 +3,11 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5">
     <title>Hyper Invaders</title>
 
     <link rel="stylesheet" type="text/css" media="all" href="all.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="screen.css" />
-    <link rel="stylesheet" type="text/css" media="handheld" href="handheld.css" />
+    <link rel="stylesheet" type="text/css" media="only screen and (min-width:651px) and (min-height:651px)" href="screen.css" />
 
     <script src="components/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="components/prefix-free/prefixfree.min.js" type="text/javascript" charset="utf-8" ></script>
@@ -36,15 +36,42 @@
                 </nav>
             </section>
 
-            <section class="cubeface" id="about1">
+            <section class="cubeface" id="about1" itemscope itemtype="http://schema.org/WebApplication">
                 <h2>About 1/3</h2>
-                <p>
-                    HyperInvaders is a game inspired by
-                    <a href="http://en.wikipedia.org/wiki/Space_Invaders" title="Wikipedia article on Space Invaders">Space Invaders</a>.
+                <p >
+                    <span itemprop="name">HyperInvaders</span>
+                    is a
+                    <span itemprop="description">
+                        <span itemprop="applicationSubCategory">shoot 'em up</span>
+                        <span itemprop="applicationCategory">game</span>
+                        inspired by
+                        <a href="http://en.wikipedia.org/wiki/Space_Invaders" title="Wikipedia article on Space Invaders">Space Invaders</a>
+                    </span>.
                 </p>
                 <p>
-                    It was created as a course project of A0M33KAJ (Client applications development in JavaScript).
-                    As such, it serves mainly to test modern web technologies and it lacks some features of the original game.
+                    It was created in
+                    <date itemprop="dateCreated">2013</date>
+                    by
+                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                        <span  itemprop="givenName">Jakub</span> <span itemprop="familyName">Stejskal</span>
+                    </span>,
+                    as a
+                    <span itemprop="educationalUse">course project</span>
+                    of A0M33KAJ (Client applications development in JavaScript).
+                    As such, it served mainly as an oportunity to practice development with modern web technologies and it lacks some features of the original game.
+                </p>
+                <p>
+                    The game should run on
+                    <span  itemprop="operatingSystem">any desktop and mobile system</span>
+                    provided that it has browser with
+                    <span itemprop="browserRequirements">HTML5 support</span>
+                    comparable to main browsers as of 2013.
+                </p>
+                <p>
+                    Source code is available at
+                    <a itemprop="downloadUrl" href="https://github.com/jakub-stejskal/hyperinvaders" title="Project GitHub Repository">
+                        https://github.com/jakub-stejskal/hyperinvaders
+                    </a>
                 </p>
                 <nav>
                     <a class="left" href="#intro">Back</a>
@@ -91,6 +118,9 @@
             </section>
 
             <section class="cubeface" id="play">
+                <nav>
+                    <a class="down" href="#game">Pause</a>
+                </nav>
             </section>
         </div>
     </div>
