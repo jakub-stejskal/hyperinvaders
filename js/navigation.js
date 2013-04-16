@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+  $( document ).ready(function() {
 
   $("a[href^=#]").hover(
   function () {
@@ -18,10 +18,6 @@ $( document ).ready(function() {
     if (target === "play") {
       $("#cube").attr("class","rotate-game");
       $("body").addClass("playing");
-    }
-    else if (target === "pause") {
-      $("#cube").attr("class","rotate-game");
-      $("body").removeClass("playing");
     }
     else {
       $("body").removeClass("playing");
