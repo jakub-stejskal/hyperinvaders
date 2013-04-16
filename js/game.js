@@ -41,17 +41,19 @@ Game.prototype.start = function() {
 };
 
 Game.prototype._onEachFrame = (function() {
-  var requestAnimationFrame = window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
+  var requestAnimationFrame = window.requestAnimationFrame ||
+    window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
+    window.msRequestAnimationFrame;
 
   if (requestAnimationFrame) {
     return function(callback) {
       var caller = this;
-      var _cb = function() { if (!this.paused) callback.call(caller); requestAnimationFrame(_cb); };
+      var _cb = function() { callback.call(caller); requestAnimationFrame(_cb); };
       _cb();
     };
   } else {
     return function(callback) {
-      setInterval(callback, 1000 / Constants.fps);
+      setInterval(callback.bind(this), 1000 / Constants.fps);
     };
   }
 })();
@@ -59,13 +61,11 @@ Game.prototype._onEachFrame = (function() {
 Game.prototype.run = (function() {
   var loops = 0,
   skipTicks = 1000 / Constants.fps,
-  maxFrameSkip = 10,
-  nextGameTick = (new Date()).getTime(),
-  lastGameTick;
+  nextGameTick;
 
   return function() {
     loops = 0;
-    while ((new Date()).getTime() > nextGameTick) {
+    while ((new Date()).getTime() > (nextGameTick = nextGameTick || (new Date()).getTime())) {
       this.update();
       nextGameTick += skipTicks;
       loops++;
