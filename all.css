@@ -33,7 +33,7 @@ body {
   font-size: 1.2em;
 }
 h1 {
-  margin-top: 20px;
+  margin-top: 5px;
   font-size: 3em;
   color: #FFF;
   text-shadow: 0 1px 0 #999, 0 2px 0 #888, 0 3px 0 #777, 0 4px 0 #666,
@@ -63,7 +63,7 @@ input {
   font: 1em Geo;
   text-align: center;
 }
-input:focus, input:active {
+input:focus, input:not([disabled]):active {
   outline: none;
   background-color: white;
   background-color: rgba(255,255,255,0.1);
@@ -81,6 +81,18 @@ input[disabled] {
   color: rgba(0,0,0,0.25);
   opacity: 0.5;
 }
+
+form span {
+  width: 40%;
+  display: inline-block;
+}
+input[type=button] {
+    width: 49%;
+}
+input[type=submit] {
+  margin-top: 2em;
+}
+
 
 section {
   position: relative;

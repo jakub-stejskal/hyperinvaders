@@ -17,7 +17,7 @@ SvgView.prototype.display = function() {
 };
 
 SvgView.prototype.hide = function() {
-  this.element.remove(this.canvas);
+  this.canvas.remove();
 };
 
 SvgView.prototype.createDrawFunction = function(drawMode) {

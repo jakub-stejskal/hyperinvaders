@@ -10,7 +10,7 @@ Constants.bottomBoundary = Constants.height - 1 * Constants.unit;
 Constants.fps = 60;
 Constants.cooldown = Constants.fps / 2;
 
-Constants.keybinding = {
+Constants.defaultKeybinding = {
     player: {
       LEFT: 37,
       RIGHT: 39,
@@ -20,3 +20,5 @@ Constants.keybinding = {
     MUTE: 77,
     RESET: 82
   };
+
+Constants.defaultDrawMethod = 'canvas';

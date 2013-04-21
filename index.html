@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" media="all" href="all.css" />
     <link rel="stylesheet" type="text/css" media="only screen and (min-width:651px) and (min-height:651px)" href="screen.css" />
 
-    <script src="components/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="components/jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="components/prefix-free/prefixfree.min.js" type="text/javascript" charset="utf-8" ></script>
     <script src="components/yepnope/yepnope.1.5.4-min.js" type="text/javascript" charset="utf-8"></script>
 
@@ -50,7 +50,7 @@
                 </p>
                 <p>
                     It was created in
-                    <date itemprop="dateCreated">2013</date>
+                    <time itemprop="dateCreated">2013</time>
                     by
                     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
                         <span  itemprop="givenName">Jakub</span> <span itemprop="familyName">Stejskal</span>
@@ -106,11 +106,18 @@
             <section class="cubeface" id="setup">
                 <h2>Settings</h2>
                 <form>
-                    <label>Move left </label><input name="left" type="text" />
-                    <label>Move right </label><input name="right" type="text" />
-                    <label>Shoot </label><input name="shoot" type="text" />
+                    <label for="left-input">Move left </label><input id="left-input" name="left" type="text" />
+                    <label for="right-input">Move right </label><input id="right-input" name="right" type="text" />
+                    <label for="shoot-input">Shoot </label><input id="shoot-input" name="shoot" type="text" />
+
+                    <label>Draw method</label>
+                    <span>
+                    <input type="button" name="drawMethod" value="svg" />
+                    <input type="button" name="drawMethod" value="canvas" />
+                    </span>
+
                     <input name="save" type="submit" value="Save settings" />
-                    <span></span>
+                    <span id="form-info"></span>
                 </form>
                 <nav>
                     <a class="up" href="#intro">Back</a>
@@ -118,6 +125,7 @@
             </section>
 
             <section class="cubeface" id="play">
+                <div></div>
                 <nav>
                     <a class="down" href="#game">Pause</a>
                 </nav>

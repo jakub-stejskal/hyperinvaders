@@ -24,11 +24,10 @@ var Loader = {
 yepnope([{
   load: Loader.gameDeps,
   complete: function () {
-    var element = $("#play");
     Loader.pubsub = Pubsub.create();
+    Loader.navigation = new Navigation(Loader.pubsub);
     Loader.sound = new Sound(Loader.pubsub);
-    Loader.view = new CanvasView(element, "chars");
-    Loader.game = new Game(Loader.pubsub, Loader.view);
+    Loader.game = new Game(Loader.pubsub);
     Loader.controller = new Controller(Loader.pubsub);
     Loader.settings = new Settings(Loader.game, Loader.controller);
     Loader.settings.apply();

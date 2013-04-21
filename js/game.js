@@ -1,10 +1,5 @@
-function Game(pubsub, view) {
+function Game(pubsub) {
   this.pubsub = pubsub;
-
-  this.view = view || new View();
-  this.view.game = this;
-  this.view.display();
-  this.view.writeText(Texts.START);
 
   this.level = "first";
   this.paused = true;
@@ -12,16 +7,21 @@ function Game(pubsub, view) {
   this.pubsub.subscribe(Events.SHOT, function (projectile) {
     this.entities.projectiles.push(projectile);
   }.bind(this));
-  this.pubsub.subscribe(Events.INPUT.PAUSE, function (isDown) {
-    if (isDown) this.paused = !this.paused;
-    window.location.hash = this.paused ? "game" :"play";
-      // TODO start game on "Play game" click
+  this.pubsub.subscribe(Events.PLAY, function (play) {
+    this.paused = !play;
     }.bind(this));
   this.pubsub.subscribe(Events.INPUT.RESET, function (isDown) {
     if (isDown) this.start();
     window.location.hash = "play";
   }.bind(this));
 }
+
+Game.prototype.setView = function(view) {
+  this.view = view;
+  this.view.game = this;
+  this.view.display();
+  this.view.writeText(Texts.START);
+};
 
 Game.prototype.start = function() {
   this.entities = {

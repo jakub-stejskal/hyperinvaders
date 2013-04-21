@@ -4,6 +4,7 @@ var Events = {
   SHOT: "hyperinvaders.shot",
   VICTORY: "hyperinvaders.victory",
   DEFEAT: "hyperinvaders.defeat",
+  PLAY:  "hyperinvaders.play",
 
   SOUND: {
     PLAY: "hyperinvaders.sound.play",

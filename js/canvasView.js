@@ -16,7 +16,7 @@ CanvasView.prototype.display = function() {
 };
 
 CanvasView.prototype.hide = function() {
-  this.element.remove(this.canvas);
+  this.canvas.remove();
 };
 
 CanvasView.prototype.createDrawFunction = function(drawMode) {

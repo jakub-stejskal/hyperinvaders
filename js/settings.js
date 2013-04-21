@@ -2,10 +2,20 @@ function Settings(game, controller) {
   this.game = game;
   this.controller = controller;
 
-  this.inputs = {
+  this.viewContainer = $("#play div");
+  this.views = {
+    svg: new SvgView(this.viewContainer, "chars"),
+    canvas: new CanvasView(this.viewContainer, "chars")
+  };
+
+  this.controlInputs = {
     left: $("#setup input[name=left]"),
     right: $("#setup input[name=right]"),
     shoot: $("#setup input[name=shoot]")
+  };
+  this.drawMethodInputs = {
+    svg: $("#setup input[name=drawMethod][value=svg]"),
+    canvas: $("#setup input[name=drawMethod][value=canvas]")
   };
   this.saveButton = $("#setup input[name=save]");
   this.saveButton.prop('disabled', true);
@@ -15,39 +25,35 @@ function Settings(game, controller) {
 }
 
 Settings.prototype.loadFromStorage = function() {
-  if (localStorage.keybinding !== undefined) {
+  if (localStorage.keybinding !== 'undefined') {
     this.keybinding = JSON.parse(localStorage.keybinding);
   }
   else {
-    this.keybinding = Constants.keybinding;
+    this.keybinding = Constants.defaultKeybinding;
   }
 
-  for (var key in this.inputs) {
+  if (localStorage.drawMethod !== 'undefined') {
+    this.drawMethod = localStorage.drawMethod;
+  }
+  else {
+    this.drawMethod = Constants.defaultDrawMethod;
+  }
+  console.log(this.drawMethod);
+  this.drawMethodInputs[this.drawMethod].prop('disabled', true);
+
+  for (var key in this.controlInputs) {
     var keyname = this.keyCodeMap[this.keybinding.player[key.toUpperCase()]];
-    this.inputs[key].val(keyname);
+    this.controlInputs[key].val(keyname);
   }
 };
 
 Settings.prototype.bind = function() {
+  for (var key in this.controlInputs) {
+    this.controlInputs[key].keydown(this.handleKeyInput.bind(this));
+  }
 
-  var settings = this;
-  var keyInputHandler = function (event) {
-    event.preventDefault();
-    event.target.value = settings.keyCodeMap[event.which];
-    settings.keybinding.player[event.target.name.toUpperCase()] = event.which;
-    if (settings.hasCollision(event.which)) {
-      settings.saveButton.prop('disabled', true);
-      $("#setup span").text("duplicate assignments");
-    }
-    else {
-      settings.saveButton.prop('disabled', false);
-      $("#setup span").text("");
-    }
-    $(this).nextAll("input").first().focus();
-  };
-
-  for (var key in this.inputs) {
-    this.inputs[key].keydown(keyInputHandler);
+  for (var method in this.drawMethodInputs) {
+    this.drawMethodInputs[method].click(this.handleButtonClick.bind(this));
   }
 
   this.saveButton.click(function (event) {
@@ -55,6 +61,34 @@ Settings.prototype.bind = function() {
     this.save();
   }.bind(this));
 };
+
+Settings.prototype.handleButtonClick = function (event) {
+    for (var key in this.drawMethodInputs) {
+      this.drawMethodInputs[key].prop('disabled', false);
+    }
+    this.drawMethodInputs[event.target.value].prop('disabled', true);
+    this.drawMethod = event.target.value;
+
+    if (!this.hasCollision()) {
+      this.saveButton.prop('disabled', false);
+      $("#setup #form-info").text("");
+    }
+  };
+
+Settings.prototype.handleKeyInput = function (event) {
+    event.preventDefault();
+    event.target.value = this.keyCodeMap[event.which];
+    this.keybinding.player[event.target.name.toUpperCase()] = event.which;
+    if (this.hasCollision(event.which)) {
+      this.saveButton.prop('disabled', true);
+      $("#setup #form-info").text("duplicate assignments");
+    }
+    else {
+      this.saveButton.prop('disabled', false);
+      $("#setup #form-info").text("");
+    }
+    $(event.target).nextAll("input").first().focus();
+  };
 
 Settings.prototype.hasCollision = function(keyCode) {
   var codes = [];
@@ -85,10 +119,14 @@ Settings.prototype.keyCodeMap = {
 Settings.prototype.save = function() {
     this.apply();
     localStorage.keybinding = JSON.stringify(this.keybinding);
-     $("#setup span").text("Saved");
+    localStorage.drawMethod = this.drawMethod;
+     $("#setup #form-info").text("Saved");
+     this.saveButton.prop('disabled', true);
   };
 
 Settings.prototype.apply = function() {
   this.controller.keybinding = this.keybinding;
+  if (this.game.view) this.game.view.hide();
+  this.game.setView(this.views[this.drawMethod]);
 };
 

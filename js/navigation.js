@@ -1,6 +1,10 @@
-  $( document ).ready(function() {
+function Navigation(pubsub) {
+  this.pubsub = pubsub;
+  this.bind();
+}
 
-  $("a[href^=#]").hover(
+Navigation.prototype.bind = function() {
+ $("a[href^=#]").hover(
   function () {
     $("#cube").addClass("hover-"+ $(this).attr('class'));
   },
@@ -9,21 +13,29 @@
   }
   );
 
-  $(window).on('hashchange', function() {
-    navigate();
-  });
+ this.pubsub.subscribe(Events.INPUT.PAUSE, function (isDown) {
+  if (isDown) {
+    current = window.location.hash.substr(1);
+    window.location.hash = (current === "play") ? "game" :"play";
+  }});
 
-  function navigate() {
-    target = window.location.hash.substr(1);
-    if (target === "play") {
-      $("#cube").attr("class","rotate-game");
-      $("body").addClass("playing");
-    }
-    else {
-      $("body").removeClass("playing");
-      $("#cube").attr("class","rotate-" + target);
-    }
+ $(window).on('hashchange', function() {
+  this.navigate();
+}.bind(this));
+
+ this.navigate();
+};
+
+Navigation.prototype.navigate = function() {
+  target = window.location.hash.substr(1);
+  if (target === "play") {
+    $("#cube").attr("class","rotate-game");
+    $("body").addClass("playing");
+    this.pubsub.publish(Events.PLAY, true);
   }
-
-  navigate();
-});
+  else {
+    $("body").removeClass("playing");
+    $("#cube").attr("class","rotate-" + target);
+    this.pubsub.publish(Events.PLAY, false);
+  }
+};
