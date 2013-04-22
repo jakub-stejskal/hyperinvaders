@@ -1,9 +1,18 @@
-function Enemy(x, y) {
+function Enemy(x, y, type) {
   this.horizontalStep = 0.25 * Constants.unit;
   this.verticalStep = 0.25 * Constants.unit;
 
-  this.color = ["#F00", "#900","#999"];
-  this.chars = ["A","G","S"];
+  switch (type) {
+    case 1:
+      this.color = ["#0F0", "#090","#999"];
+      this.chars = ["C","B","S"]; break;
+    case 2:
+      this.color = ["#F00", "#900","#999"];
+      this.chars = ["A","G","S"]; break;
+    case 3:
+      this.color = ["#00F", "#009","#999"];
+      this.chars = ["L","K","S"]; break;
+  }
 
   this.x = (x || 0) * 1.2 * Constants.unit;
   this.y = (y || 0) * Constants.unit;
