@@ -8,15 +8,13 @@
 
     <link rel="stylesheet" type="text/css" media="all" href="all.css" />
     <link rel="stylesheet" type="text/css" media="only screen and (min-width:651px) and (min-height:651px)" href="screen.css" />
+    <script src="components/prefix-free/prefixfree.min.js" type="text/javascript" charset="utf-8"></script>
 
     <script src="components/jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="components/prefix-free/prefixfree.min.js" type="text/javascript" charset="utf-8" ></script>
-    <script src="components/yepnope/yepnope.1.5.4-min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="components/modernizr/modernizr.custom.93423.js" type="text/javascript" charset="utf-8"></script>
 
     <script src="js/loader.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/soundloader.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/navigation.js" type="text/javascript" charset="utf-8"></script>
-
+    <script src="js/soundloader.js" type="text/javascript" charset="utf-8" defer></script>
 </head>
 <body>
 
@@ -125,9 +123,16 @@
             </section>
 
             <section class="cubeface" id="play">
-                <div></div>
+                <div id="viewContainer">
+                    <p>Game is not loaded yet.</p>
+                </div>
+                <div id="touchscreen">
+                    <button type="button" name="left"></button>
+                    <button type="button" name="right"></button>
+                    <button type="button" name="shoot"></button>
+                </div>
                 <nav>
-                    <a class="down" href="#game">Pause</a>
+                    <a class="down" href="#game">Play / Pause</a>
                 </nav>
             </section>
         </div>

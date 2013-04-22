@@ -1,12 +1,22 @@
-function Controller(pubsub, keybinding, element) {
+function Controller(pubsub) {
   this.pubsub = pubsub;
-  element = element || window;
   this._pressed = {};
-  this.keybinding = keybinding;
+  this.keybinding = Constants.defaultKeybinding;
 
   var controller = this;
-  element.addEventListener('keyup', function(event) { controller.onKeyup(event); }, false);
-  element.addEventListener('keydown', function(event) { controller.onKeydown(event); }, false);
+  $(window).keyup(function(event) { controller.onKeyup(event);});
+  $(window).keydown(function(event) { controller.onKeydown(event);});
+  $(window).keypress(function(event) { event.stopPropagation();});
+
+  this.touchButtons = {
+    left: $("#touchscreen button[name=left]"),
+    right: $("#touchscreen button[name=right]"),
+    shoot: $("#touchscreen button[name=shoot]")
+  };
+
+  for (var button in this.touchButtons) {
+    this.touchButtons[button].on('mouseup mousedown touchstart touchend',controller.onButtonClick.bind(controller));
+  }
 }
 
 Controller.prototype.isDown = function(keyCode) {
@@ -40,5 +50,8 @@ Controller.prototype.onKeypress = function(code, isDown) {
   return true;
 };
 
-
-
+Controller.prototype.onButtonClick = function(event) {
+  var isDown = event.type == "mousedown" || event.type == "touchstart";
+  this.pubsub.publish(Events.INPUT[event.target.name.toUpperCase()], isDown);
+  event.preventDefault();
+};

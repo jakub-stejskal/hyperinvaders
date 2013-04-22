@@ -2,7 +2,7 @@ function Settings(game, controller) {
   this.game = game;
   this.controller = controller;
 
-  this.viewContainer = $("#play div");
+  this.viewContainer = $("#play div#viewContainer");
   this.views = {
     svg: new SvgView(this.viewContainer, "chars"),
     canvas: new CanvasView(this.viewContainer, "chars")
@@ -25,20 +25,19 @@ function Settings(game, controller) {
 }
 
 Settings.prototype.loadFromStorage = function() {
-  if (localStorage.keybinding !== 'undefined') {
+  if (localStorage.keybinding !== undefined && localStorage.keybinding !== 'undefined') {
     this.keybinding = JSON.parse(localStorage.keybinding);
   }
   else {
     this.keybinding = Constants.defaultKeybinding;
   }
 
-  if (localStorage.drawMethod !== 'undefined') {
+  if (localStorage.drawMethod !== undefined && localStorage.drawMethod !== 'undefined') {
     this.drawMethod = localStorage.drawMethod;
   }
   else {
     this.drawMethod = Constants.defaultDrawMethod;
   }
-  console.log(this.drawMethod);
   this.drawMethodInputs[this.drawMethod].prop('disabled', true);
 
   for (var key in this.controlInputs) {
@@ -129,4 +128,3 @@ Settings.prototype.apply = function() {
   if (this.game.view) this.game.view.hide();
   this.game.setView(this.views[this.drawMethod]);
 };
-

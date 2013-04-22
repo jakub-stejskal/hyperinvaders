@@ -1,14 +1,20 @@
 function Game(pubsub) {
   this.pubsub = pubsub;
-
   this.level = "first";
+  this.playing = false;
   this.paused = true;
 
   this.pubsub.subscribe(Events.SHOT, function (projectile) {
     this.entities.projectiles.push(projectile);
   }.bind(this));
   this.pubsub.subscribe(Events.PLAY, function (play) {
-    this.paused = !play;
+    if (!this.playing) {
+      this.start();
+      window.location.hash = "play";
+    }
+    else {
+      this.paused = !play;
+    }
     }.bind(this));
   this.pubsub.subscribe(Events.INPUT.RESET, function (isDown) {
     if (isDown) this.start();
@@ -36,6 +42,7 @@ Game.prototype.start = function() {
   this.view.reset();
 
   this.paused = false;
+  this.playing = true;
 
   this._onEachFrame(Game.prototype.run);
 };
@@ -112,12 +119,14 @@ Game.prototype.checkGameEvents = function() {
 
 Game.prototype.handleVictory = function() {
   this.paused = true;
+  this.playing = false;
   this.view.writeText(Texts.VICTORY);
   this.pubsub.publish(Events.VICTORY);
 };
 
 Game.prototype.handleDefeat = function() {
   this.paused = true;
+  this.playing = false;
   this.view.writeText(Texts.DEFEAT);
   this.pubsub.publish(Events.DEFEAT);
 };

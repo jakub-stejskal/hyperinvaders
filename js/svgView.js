@@ -10,9 +10,11 @@ function SvgView(element, drawMode) {
 
 SvgView.prototype.display = function() {
   this.canvas = document.createElementNS(this.ns, "svg");
-  this.canvas.setAttribute("width", this.width + "px");
-  this.canvas.setAttribute("height", this.height + "px");
+  this.canvas.setAttribute("width", "100%");
+  this.canvas.setAttribute("height", "100%");
+  this.canvas.setAttribute("viewBox","0 0 600 600");
 
+  this.element.empty();
   this.element.prepend(this.canvas);
 };
 

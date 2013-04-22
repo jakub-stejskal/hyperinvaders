@@ -1,3 +1,5 @@
+@media only screen and (min-width:651px) and (min-height:651px) {
+
 .screen-centered
 {
     position: absolute;
@@ -10,8 +12,8 @@
 }
 
 @keyframes rotate-cube {
-  from {  transform: translateZ(-1000px) rotateZ(0Deg) rotateY(0Deg);}
-  to{ transform: translateZ(-1000px) rotateZ(1080Deg) rotateY(360Deg);}
+  from {  transform: translateZ(-1000px) rotateZ(0deg) rotateY(0deg);}
+  to{ transform: translateZ(-1000px) rotateZ(1080deg) rotateY(360deg);}
 }
 
 .stage {
@@ -56,22 +58,22 @@ p {
 }
 
 
-#cube.rotate-intro { transform: translateZ(-300px) rotateY(0Deg); }
-#cube.rotate-about1 { transform: translateZ(-300px) rotateY(-90Deg); }
-#cube.rotate-about2 { transform: translateZ(-300px) rotateY(-180Deg); }
-#cube.rotate-about3 { transform: translateZ(-300px) rotateY(-270Deg); }
-#cube.rotate-setup { transform: translateZ(-300px) rotateX(90Deg); }
-#cube.rotate-game { transform: translateZ(-300px) rotateX(-90Deg); }
+#cube.rotate-intro { transform: translateZ(-300px) rotateY(0deg); }
+#cube.rotate-about1 { transform: translateZ(-300px) rotateY(-90deg); }
+#cube.rotate-about2 { transform: translateZ(-300px) rotateY(-180deg); }
+#cube.rotate-about3 { transform: translateZ(-300px) rotateY(-270deg); }
+#cube.rotate-setup { transform: translateZ(-300px) rotateX(90deg); }
+#cube.rotate-game { transform: translateZ(-300px) rotateX(-90deg); }
 
 
 section { position: absolute; }
 #intro { transform: translateZ(300px); }
-#about1 { transform: translateX(300px) rotateY(90Deg); }
-#about2 { transform: translateZ(-300px) rotateY(180Deg); }
-#about3 { transform: translateX(-300px) rotateY(-90Deg); }
-#setup { transform: translateY(300px) rotateX(-90Deg); }
-#game { transform: translateY(-300px) rotateX(90Deg); }
-#play { transform: translateY(250px) rotateX(90Deg); }
+#about1 { transform: translateX(300px) rotateY(90deg); }
+#about2 { transform: translateZ(-300px) rotateY(180deg); }
+#about3 { transform: translateX(-300px) rotateY(-90deg); }
+#setup { transform: translateY(300px) rotateX(-90deg); }
+#game { transform: translateY(-300px) rotateX(90deg); }
+#play { transform: translateY(250px) rotateX(90deg); }
 
 .up, .down, .left, .right {
   position: absolute;
@@ -95,10 +97,10 @@ section { position: absolute; }
 
 .playing #game {
   opacity: 0;
-  transform: translateY(250px) rotateX(90Deg);
+  transform: translateY(250px) rotateX(90deg);
 }
 .playing #play {
-  transform: translateY(-290px) rotateX(90Deg);
+  transform: translateY(-290px) rotateX(90deg);
   opacity: 1;
 }
 #playbutton {
@@ -106,4 +108,5 @@ section { position: absolute; }
 }
 .playing #playbutton {
   opacity: 0;
+}
 }

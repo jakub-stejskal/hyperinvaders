@@ -12,6 +12,7 @@ CanvasView.prototype.display = function() {
 
 	this.context = this.canvas.getContext("2d");
 
+	this.element.empty();
 	this.element.prepend(this.canvas);
 };
 
