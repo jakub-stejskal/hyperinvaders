@@ -1,3 +1,6 @@
+/**
+  Constants for PubSub events
+ */
 var Events = {
   BEAT: "hyperinvaders.beat",
   EXPLOSION: "hyperinvaders.explosion",

@@ -1,3 +1,7 @@
+/**
+  Handles game settings form and localStorage:
+    keybinding and draw method
+ */
 function Settings(game, controller) {
   this.game = game;
   this.controller = controller;
@@ -20,65 +24,63 @@ function Settings(game, controller) {
   this.saveButton = $("#setup input[name=save]");
   this.saveButton.prop('disabled', true);
 
-  this.loadFromStorage();
-  this.bind();
+  this._loadFromStorage();
+  this._init();
+  this._apply();
 }
 
-Settings.prototype.loadFromStorage = function() {
-  if (localStorage.keybinding !== undefined && localStorage.keybinding !== 'undefined') {
-    this.keybinding = JSON.parse(localStorage.keybinding);
+/**
+  Loads settings from local storage or sets them to default
+ */
+Settings.prototype._loadFromStorage = function() {
+  if (Modernizr.localstorage && localStorage['saved'] == 'true') {
+    this.keybinding = JSON.parse(localStorage['keybinding']);
+    this.drawMethod = localStorage['drawMethod'];
   }
   else {
     this.keybinding = Constants.defaultKeybinding;
-  }
-
-  if (localStorage.drawMethod !== undefined && localStorage.drawMethod !== 'undefined') {
-    this.drawMethod = localStorage.drawMethod;
-  }
-  else {
     this.drawMethod = Constants.defaultDrawMethod;
   }
   this.drawMethodInputs[this.drawMethod].prop('disabled', true);
-
   for (var key in this.controlInputs) {
-    var keyname = this.keyCodeMap[this.keybinding.player[key.toUpperCase()]];
+    var keyname = this._keyCodeMap[this.keybinding.player[key.toUpperCase()]];
     this.controlInputs[key].val(keyname);
   }
 };
 
-Settings.prototype.bind = function() {
+Settings.prototype._init = function() {
   for (var key in this.controlInputs) {
-    this.controlInputs[key].keydown(this.handleKeyInput.bind(this));
+    this.controlInputs[key].keydown(this._handleKeyInput.bind(this));
   }
 
   for (var method in this.drawMethodInputs) {
-    this.drawMethodInputs[method].click(this.handleButtonClick.bind(this));
+    this.drawMethodInputs[method].click(this._handleButtonClick.bind(this));
   }
 
   this.saveButton.click(function (event) {
     event.preventDefault();
-    this.save();
+    this._save();
   }.bind(this));
 };
 
-Settings.prototype.handleButtonClick = function (event) {
+Settings.prototype._handleButtonClick = function (event) {
     for (var key in this.drawMethodInputs) {
       this.drawMethodInputs[key].prop('disabled', false);
     }
     this.drawMethodInputs[event.target.value].prop('disabled', true);
     this.drawMethod = event.target.value;
 
-    if (!this.hasCollision()) {
+    if (!this._hasCollision()) {
       this.saveButton.prop('disabled', false);
       $("#setup #form-info").text("");
     }
   };
 
-Settings.prototype.handleKeyInput = function (event) {
+Settings.prototype._handleKeyInput = function (event) {
     event.preventDefault();
-    event.target.value = this.keyCodeMap[event.which];
+    event.target.value = this._keyCodeMap[event.which];
     this.keybinding.player[event.target.name.toUpperCase()] = event.which;
-    if (this.hasCollision(event.which)) {
+    if (this._hasCollision(event.which)) {
       this.saveButton.prop('disabled', true);
       $("#setup #form-info").text("duplicate assignments");
     }
@@ -89,7 +91,7 @@ Settings.prototype.handleKeyInput = function (event) {
     $(event.target).nextAll("input").first().focus();
   };
 
-Settings.prototype.hasCollision = function(keyCode) {
+Settings.prototype._hasCollision = function(keyCode) {
   var codes = [];
   for (var code in this.keybinding.player) {
     if (codes.indexOf(this.keybinding.player[code]) == -1) {
@@ -103,7 +105,7 @@ Settings.prototype.hasCollision = function(keyCode) {
   return false;
 };
 
-Settings.prototype.keyCodeMap = {
+Settings.prototype._keyCodeMap = {
   8:"backspace", 9:"tab", 13:"return", 16:"shift", 17:"ctrl", 18:"alt", 19:"pausebreak", 20:"capslock", 27:"escape", 32:" ", 33:"pageup",
   34:"pagedown", 35:"end", 36:"home", 37:"left", 38:"up", 39:"right", 40:"down", 43:"+", 44:"printscreen", 45:"insert", 46:"delete",
   48:"0", 49:"1", 50:"2", 51:"3", 52:"4", 53:"5", 54:"6", 55:"7", 56:"8", 57:"9", 59:";",
@@ -115,15 +117,19 @@ Settings.prototype.keyCodeMap = {
   144:"numlock", 145:"scrolllock", 186:";", 187:"=", 188:",", 189:"-", 190:".", 191:"/", 192:"`", 219:"[", 220:"\\", 221:"]", 222:"'"
 };
 
-Settings.prototype.save = function() {
+Settings.prototype._save = function() {
     this.apply();
-    localStorage.keybinding = JSON.stringify(this.keybinding);
-    localStorage.drawMethod = this.drawMethod;
+    if (Modernizr.localstorage) {
+      localStorage['saved'] = 'true';
+      localStorage['keybinding'] = JSON.stringify(this.keybinding);
+      localStorage['drawMethod'] = this.drawMethod;
+    }
      $("#setup #form-info").text("Saved");
      this.saveButton.prop('disabled', true);
   };
 
-Settings.prototype.apply = function() {
+
+Settings.prototype._apply = function() {
   this.controller.keybinding = this.keybinding;
   if (this.game.view) this.game.view.hide();
   this.game.setView(this.views[this.drawMethod]);

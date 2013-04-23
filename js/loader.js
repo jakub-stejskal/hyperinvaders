@@ -1,14 +1,17 @@
+/**
+  Dynamically loads dependencies and initializes the application
+ */
 var Loader = {
   navDeps: [
   "components/pubsubjs/pubsub.js",
-  "js/events.js",
-  "js/navigation.js"
+  "js/constants/events.js",
+  "js/controllers/navigation.js"
   ],
 
   gameDeps: [
-  "js/constants.js",
-  "js/texts.js",
-  "js/levels.js",
+  "js/constants/constants.js",
+  "js/constants/texts.js",
+  "js/constants/levels.js",
 
   "js/entities/entity.js",
   "js/entities/shooter.js",
@@ -17,24 +20,21 @@ var Loader = {
   "js/entities/projectile.js",
 
   "js/commander.js",
-  "js/canvasView.js",
-  "js/svgView.js",
-  "js/sound.js",
+  "js/views/canvasView.js",
+  "js/views/svgView.js",
+  "js/views/sound.js",
   "js/game.js",
-  "js/controller.js",
-  "js/settings.js"
+  "js/controllers/controller.js",
+  "js/controllers/settings.js"
   ]
 };
 
 Modernizr.load([{
-//   test: Modernizr.csstransforms3d,
-//   yep: "screen.css",
-//   complete: function () {
-//     console.log("screen loaded");
-//   }
-// },
-// {
   load: "components/jquery/jquery.js"
+},
+{
+  test: Modernizr.csstransforms3d && !$('html').is('-ms-'),
+  yep: "screen.css"
 },
 {
   load: Loader.navDeps,
@@ -47,17 +47,16 @@ Modernizr.load([{
   test: Modernizr.canvas || Modernizr.inlinesvg,
   yep: Loader.gameDeps,
   callback: {
-    "js/sound.js": function() { Loader.sound = new Sound(Loader.pubsub); },
+    "js/views/sound.js": function() { Loader.sound = new Sound(Loader.pubsub); },
     "js/game.js": function() { Loader.game = new Game(Loader.pubsub); },
-    "js/controller.js": function() {
+    "js/controllers/controller.js": function() {
       $( document ).ready(function() {
         Loader.controller = new Controller(Loader.pubsub);
       });
     },
-    "js/settings.js": function() {
+    "js/controllers/settings.js": function() {
       $( document ).ready(function() {
           Loader.settings = new Settings(Loader.game, Loader.controller);
-          Loader.settings.apply();
         });
     }
   }

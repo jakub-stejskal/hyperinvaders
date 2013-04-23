@@ -1,3 +1,7 @@
+/**
+  Provides enemies for given level
+  There is currently only one level
+ */
 var Levels = {
   first: {
     enemies: function(pubsub) {
@@ -17,6 +21,9 @@ var Levels = {
   }
 };
 
+/**
+  Initializes enemies for given level
+ */
 Levels.initializeEnemies = function(level, pubsub) {
   return Levels[level].enemies(pubsub);
 };

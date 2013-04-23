@@ -1,11 +1,15 @@
+/**
+  Listens to inputs from keyboard, mouse and touchscreen events
+  and fires respective PubSub events.
+ */
 function Controller(pubsub) {
   this.pubsub = pubsub;
   this._pressed = {};
   this.keybinding = Constants.defaultKeybinding;
 
   var controller = this;
-  $(window).keyup(function(event) { controller.onKeyup(event);});
-  $(window).keydown(function(event) { controller.onKeydown(event);});
+  $(window).keyup(function(event) { controller._onKeyup(event);});
+  $(window).keydown(function(event) { controller._onKeydown(event);});
   $(window).keypress(function(event) { event.stopPropagation();});
 
   this.touchButtons = {
@@ -15,29 +19,36 @@ function Controller(pubsub) {
   };
 
   for (var button in this.touchButtons) {
-    this.touchButtons[button].on('mouseup mousedown touchstart touchend',controller.onButtonClick.bind(controller));
+    this.touchButtons[button].on('mouseup mousedown touchstart touchend',
+      controller._onButtonClick.bind(controller));
   }
 }
 
-Controller.prototype.isDown = function(keyCode) {
+/**
+  true if key with keyCode is already pressed
+ */
+Controller.prototype._isDown = function(keyCode) {
   return this._pressed[keyCode];
 };
 
-Controller.prototype.onKeydown = function(event) {
-  if (!this.isDown(event.keyCode)) {
+Controller.prototype._onKeydown = function(event) {
+  if (!this._isDown(event.keyCode)) {
     this._pressed[event.keyCode] = true;
-    var matched = this.onKeypress(event.keyCode, true);
+    var matched = this._onKeypress(event.keyCode, true);
     if (matched) event.preventDefault();
   }
 };
 
-Controller.prototype.onKeyup = function(event) {
+Controller.prototype._onKeyup = function(event) {
   delete this._pressed[event.keyCode];
-  var matched = this.onKeypress(event.keyCode, false);
+  var matched = this._onKeypress(event.keyCode, false);
   if (matched) event.preventDefault();
 };
 
-Controller.prototype.onKeypress = function(code, isDown) {
+/**
+  Maps key events to PubSub events according to keybinding
+ */
+Controller.prototype._onKeypress = function(code, isDown) {
   switch (code) {
     case this.keybinding.player.LEFT: this.pubsub.publish(Events.INPUT.LEFT, isDown); break;
     case this.keybinding.player.RIGHT: this.pubsub.publish(Events.INPUT.RIGHT, isDown); break;
@@ -50,7 +61,10 @@ Controller.prototype.onKeypress = function(code, isDown) {
   return true;
 };
 
-Controller.prototype.onButtonClick = function(event) {
+/**
+  Maps mouse/touch events to PubSub events
+ */
+Controller.prototype._onButtonClick = function(event) {
   var isDown = event.type == "mousedown" || event.type == "touchstart";
   this.pubsub.publish(Events.INPUT[event.target.name.toUpperCase()], isDown);
   event.preventDefault();

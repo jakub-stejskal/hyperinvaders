@@ -1,3 +1,7 @@
+/**
+  Abstract game entity.
+  Has position, speed, size and appearence.
+ */
 function Entity() {
   this.width = 0.7 * Constants.unit;
   this.height = 0.6 * Constants.unit;
@@ -19,6 +23,10 @@ Entity.prototype.init = function(pubsub) {
   return this;
 };
 
+/**
+  returns appearence according to drawing mode (chars, color)
+  and entity state (ok, destroyed)
+ */
 Entity.prototype.getAppearence = function(mode) {
   switch (this.state) {
     case 'ok': return this[mode][this.appearenceIndex % (this[mode].length - 1)];
@@ -27,6 +35,9 @@ Entity.prototype.getAppearence = function(mode) {
   }
 };
 
+/**
+  Unique identification of entity
+ */
 Entity.prototype.getId = function() {
   var __next_objid=1;
   return function () {
@@ -61,7 +72,10 @@ Entity.prototype.bottom = function() { return this.y + this.height; };
 Entity.prototype.left = function() { return this.x; };
 Entity.prototype.right = function() { return this.x + this.width; };
 
-
+/**
+  Decrements expiration of temporary states,
+  changes states upon expiration
+ */
 Entity.prototype.update = function(game) {
   if (this.stateExpiration > 0) {
     this.stateExpiration--;

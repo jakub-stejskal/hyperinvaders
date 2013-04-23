@@ -1,9 +1,12 @@
+/**
+  Handles navigation on Cube
+ */
 function Navigation(pubsub) {
   this.pubsub = pubsub;
-  this.bind();
+  this._init();
 }
 
-Navigation.prototype.bind = function() {
+Navigation.prototype._init = function() {
  $("a[href^=#]").hover(
   function () {
     $("#cube").addClass("hover-"+ $(this).attr('class'));
@@ -20,13 +23,13 @@ Navigation.prototype.bind = function() {
   }});
 
  $(window).on('hashchange', function() {
-  this.navigate();
+  this._navigate();
 }.bind(this));
 
- this.navigate();
+ this._navigate();
 };
 
-Navigation.prototype.navigate = function() {
+Navigation.prototype._navigate = function() {
   target = window.location.hash.substr(1);
   if (target === "play") {
     $("#cube").attr("class","rotate-game");

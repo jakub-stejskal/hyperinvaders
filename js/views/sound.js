@@ -1,7 +1,13 @@
+/**
+  Handles sound playback
+ */
 function Sound() {
   this.playing = false;
 }
 
+/**
+  Initiates playback and subscribe audible game events
+ */
 Sound.prototype.start = function(pubsub) {
   this.playing = true;
   MIDI.setVolume(0, 127);

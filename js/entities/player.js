@@ -1,3 +1,6 @@
+/**
+  Player entity
+ */
 function Player() {
   this.horizontalStep = 2;
 
@@ -14,6 +17,9 @@ function Player() {
 
 Player.prototype = new Shooter(false);
 
+/**
+  Subscribes player-controlling input events
+ */
 Player.prototype.init = function(pubsub) {
   Shooter.prototype.init.call(this, pubsub);
 
@@ -30,6 +36,9 @@ Player.prototype.init = function(pubsub) {
   return this;
 };
 
+/**
+  Handles movement and shooting according to input flags
+ */
 Player.prototype.update = function(game) {
   Shooter.prototype.update.call(this, game);
   this.shouldShoot = this.shooting;

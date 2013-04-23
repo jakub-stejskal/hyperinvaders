@@ -1,3 +1,6 @@
+/**
+  Enemy entity.
+ */
 function Enemy(x, y, type) {
   this.horizontalStep = 0.25 * Constants.unit;
   this.verticalStep = 0.25 * Constants.unit;
@@ -20,6 +23,9 @@ function Enemy(x, y, type) {
 
 Enemy.prototype = new Shooter(true);
 
+/**
+  Changes appearence on every beat
+ */
 Enemy.prototype.init = function(pubsub) {
   Shooter.prototype.init.call(this, pubsub);
   pubsub.subscribe(Events.BEAT, function(beat){
