@@ -40,12 +40,55 @@ h1 {
 }
 h2 {
   font-size: 2em;
-  margin: 50px 0 50px;
+  margin: 50px 20px 50px;
   text-shadow: 3px 5px 5px rgba(0,0,0,.25);
 }
-p {
-  margin: 1em 1em;
+section, aside {
+  position: relative;
+  transition: all 600ms;
+  border: 1px solid;
+  min-height: 200px;
+  background-color: rgb(50, 50, 50);
 }
+nav {text-align: center;}
+p {
+  margin: 1em 10%;
+}
+ul, dl {
+  text-align: left;
+  margin-left: 10%;
+  list-style-type: square;
+}
+li {
+  margin-bottom: 1em;
+}
+dt {
+  font-weight: bold;
+}
+dt, dd {
+  display: inline;
+  margin: 5px;
+}
+dt:after {
+  content: ':';
+}
+dd:after {
+  content: '\A';
+  white-space:pre;
+}
+a {
+  text-align: center;
+  border-radius: 5px;
+  color: black;
+  line-height: 1em;
+  text-decoration: none;
+  background-color:rgb(255,255,255);
+  background-color:rgba(255,255,255,0.2);
+  padding: 5px;
+  white-space: nowrap;
+  position: relative;
+}
+
 form {
   padding: 0 20%;
   text-align: left;
@@ -80,39 +123,15 @@ input[disabled] {
   color: rgba(0,0,0,0.25);
   opacity: 0.5;
 }
-
 form span {
   width: 40%;
   display: inline-block;
 }
 input[type=button] {
-    width: 49%;
+    width: 45%;
 }
 input[type=submit] {
   margin-top: 2em;
-}
-
-nav {text-align: center;}
-
-a {
-  text-align: center;
-  border-radius: 5px;
-  color: black;
-  line-height: 1em;
-  text-decoration: none;
-  background-color:rgb(255,255,255);
-  background-color:rgba(255,255,255,0.2);
-  padding: 5px;
-  white-space: nowrap;
-  position: relative;
-}
-
-
-section {
-  position: relative;
-  transition: all 600ms;
-  border: 1px solid;
-  min-height: 200px;
 }
 
 #intro {
