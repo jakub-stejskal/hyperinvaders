@@ -8,7 +8,7 @@ function Game(pubsub) {
     this.entities.projectiles.push(projectile);
   }.bind(this));
   this.pubsub.subscribe(Events.PLAY, function (play) {
-    if (!this.playing) {
+    if (play && !this.playing) {
       this.start();
       window.location.hash = "play";
     }
