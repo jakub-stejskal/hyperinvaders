@@ -16,7 +16,7 @@ Shooter.prototype.update = function(game) {
     this.cooldown--;
   }
   else {
-    if (this.shouldShoot) {
+    if (this.shouldShoot && this.state == 'ok') {
       this.shoot();
       this.shouldShoot = false;
     }
