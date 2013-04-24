@@ -16,6 +16,7 @@ function Entity() {
   this.y = 0;
   this.state = 'ok';
   this.stateExpiration = 0;
+  this.hasChanged = false;
 }
 
 Entity.prototype.init = function(pubsub) {
@@ -27,12 +28,18 @@ Entity.prototype.init = function(pubsub) {
   returns appearence according to drawing mode (chars, color)
   and entity state (ok, destroyed)
  */
-Entity.prototype.getAppearence = function(mode) {
+Entity.prototype.getAppearence = function(mode, index) {
   switch (this.state) {
-    case 'ok': return this[mode][this.appearenceIndex % (this[mode].length - 1)];
+    case 'ok': return this[mode][(index || this.appearenceIndex) % (this[mode].length - 1)];
     case 'destroyed': return this[mode][this[mode].length - 1];
     default: return '';
   }
+};
+
+Entity.prototype.setAppearence = function(index) {
+  this.prevAppearence = this.appearenceIndex;
+  this.appearenceIndex = index;
+  this.hasChanged = true;
 };
 
 /**
@@ -48,23 +55,29 @@ Entity.prototype.getId = function() {
 }();
 
 Entity.prototype.moveLeft = function() {
-  if (this.state == 'ok')
-    this.x -= this.horizontalStep;
+  this.setPosition(this.x - this.horizontalStep, this.y);
 };
 
 Entity.prototype.moveRight = function() {
-  if (this.state == 'ok')
-    this.x += this.horizontalStep;
+  this.setPosition(this.x + this.horizontalStep, this.y);
 };
 
 Entity.prototype.moveUp = function() {
-  if (this.state == 'ok')
-    this.y -= this.verticalStep;
+  this.setPosition(this.x, this.y - this.verticalStep);
 };
 
 Entity.prototype.moveDown = function() {
-  if (this.state == 'ok')
-    this.y += this.verticalStep;
+  this.setPosition(this.x, this.y + this.verticalStep);
+};
+
+Entity.prototype.setPosition = function(x, y) {
+  if (this.state == 'ok') {
+    this.prevX = this.x;
+    this.prevY = this.y;
+    this.x = x;
+    this.y = y;
+    this.hasChanged = true;
+  }
 };
 
 Entity.prototype.top = function() { return this.y; };
@@ -93,12 +106,16 @@ Entity.prototype.update = function(game) {
       case 'disposed':
         break;
     }
+    this.hasChanged = true;
   }
 };
 
 Entity.prototype.destroy = function() {
   this.state = 'destroyed';
   this.stateExpiration = Constants.fps / 2;
+  this.prevX = this.x;
+  this.prevY = this.y;
+  this.hasChanged = true;
 };
 
 Entity.prototype.isOutOfBounds = function() {
