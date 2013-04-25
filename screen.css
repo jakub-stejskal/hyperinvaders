@@ -44,12 +44,14 @@
 }
 
 section {
+  position: absolute;
   top: 15px;
   left: 15px;
   height: 600px;
   width: 600px;
   margin: 0;
   padding-bottom: 0;
+  box-shadow: none;
 }
 aside {
   position: fixed;
@@ -70,7 +72,6 @@ p {
 #cube.rotate-setup { transform: translateZ(-300px) rotateX(90deg); }
 #cube.rotate-game { transform: translateZ(-300px) rotateX(-90deg); }
 
-section { position: absolute; }
 #intro { transform: translateZ(300px); }
 #about1 { transform: translateX(300px) rotateY(90deg); }
 #about2 { transform: translateZ(-300px) rotateY(180deg); }
