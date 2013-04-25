@@ -19,7 +19,7 @@ function Controller(pubsub) {
   };
 
   for (var button in this.touchButtons) {
-    this.touchButtons[button].on('mouseup mousedown touchstart touchend',
+    this.touchButtons[button].on('mouseup mousedown mouseout touchstart touchend',
       controller._onButtonClick.bind(controller));
   }
 }
