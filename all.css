@@ -54,12 +54,11 @@ section, aside {
  section {margin: 1em 10%;}
 }
 nav {text-align: center;}
-p {
+p, ul {
   margin: 1em 10%;
 }
 ul, dl {
   text-align: left;
-  margin-left: 10%;
   list-style-type: square;
 }
 li {

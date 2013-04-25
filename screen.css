@@ -36,7 +36,7 @@
 }
 
 #cube {
-  /*animation: rotate-cube 15s linear infinite;*/
+  animation: rotate-cube 15s linear infinite;
   animation-delay: 2s;
 }
 #cube:hover, .playing #cube {
@@ -101,7 +101,7 @@ section { position: absolute; }
 
 
 #play {
-    opacity: 0;
+  opacity: 0;
 }
 .playing #game {
   opacity: 0;

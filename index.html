@@ -25,7 +25,19 @@
             <section class="cubeface" id="intro">
                 <h2>Intro</h2>
                 <p>
-                    Welcome to the cube.
+                    Welcome to Hyper Invaders game.
+                </p>
+                <p>
+                    You can
+                    <a href="#play" title="play the game">play the game</a> straight away or learn
+                    <a href="#game" title="how to play">how to play</a> first.
+                </p>
+                <p>
+                    You might also want to adjust controls and draw method in
+                    <a href="#setup" title="settings">settings</a> or learn something more about
+                    <a href="#about1" title="general info">general info</a>,
+                    <a href="#about2" title="features">features</a> or
+                    <a href="#about3" title="dependencies">dependencies</a> of the game.
                 </p>
                 <nav>
                     <a data-icon="✉" class="up" href="#game">Play game</a>
@@ -50,13 +62,13 @@
                     It was created in
                     <time itemprop="dateCreated">2013</time>
                     by
-                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                    <a href="https://plus.google.com/115118938925955330274?rel=author" itemprop="author" itemscope itemtype="http://schema.org/Person">
                         <span  itemprop="givenName">Jakub</span> <span itemprop="familyName">Stejskal</span>
-                    </span>,
+                    </a>,
                     as a
                     <span itemprop="educationalUse">course project</span>
                     of A0M33KAJ (Client applications development in JavaScript).
-                    As such, it served mainly as an oportunity to practice development with modern web technologies and it lacks some features of the original game.
+                    As such, it served mainly as an opportunity to practice development with modern web technologies and it lacks some features of the original game.
                 </p>
                 <p>
                     The game should run on
@@ -67,7 +79,7 @@
                 </p>
                 <p>
                     Source code is available at
-                    <a itemprop="downloadUrl" href="https://github.com/jakub-stejskal/hyperinvaders" title="Project GitHub Repository">
+                    <a target="_blank" title="Project GitHub Repository" href="https://github.com/jakub-stejskal/hyperinvaders" itemprop="downloadUrl" >
                         https://github.com/jakub-stejskal/hyperinvaders
                     </a>
                 </p>
@@ -79,14 +91,16 @@
 
             <section class="cubeface" id="about2">
                 <h2>About 2/3</h2>
-                <p>These are libraries and resources this project is dependent on:</p>
+                <p>
+                    These are features and technologies used in the app, it also happens to be a list of requirements for the course project:
+                </p>
                 <ul>
-                    <li><a href="http://jquery.com/">jQuery</a> - for DOM manipulation and event handling</li>
-                    <li><a href="http://mudcu.be/midi-js/">Midi.js</a> - for sound playback</li>
-                    <li><a href="http://modernizr.com/">Modernizr</a> - for browser support detection and autoloading</li>
-                    <li><a href="http://leaverou.github.io/prefixfree/">-prefix-free</a> - for automatic runtime vendor prefixing</li>
-                    <li><a href="https://github.com/nazomikan/PubsubJS">PubsubJS</a> - for custom events handling</li>
-                    <li><a href="http://www.dafont.com/pixel-invaders.font">Pixel Invaders Font</a> - for presentation of game entities</li>
+                    <li>it is a valid HTML5 document and it is cross-browser compatible and responsive</li>
+                    <li>it uses semantic elements, microformats, SVG and canvas graphics and audio element</li>
+                    <li>it runs offline (yet without sound) thanks to cache</li>
+                    <li>it uses CSS3 selectors, transformation, transitions, animation and media queries</li>
+                    <li>it dynamically handles vendor prefixes thanks to -prefix-free library</li>
+                    <li>it is written in OOP manner, it uses new JS APIs (LocalStorage, Media API..)</li>
                 </ul>
                 <nav>
                     <a class="left" href="#about1">Back</a>
@@ -96,14 +110,32 @@
 
             <section class="cubeface" id="about3">
                 <h2>About 3/3</h2>
+                <p>
+                    These are libraries and resources this project is dependent on:
+                </p>
+                <ul>
+                    <li><a target="_blank" title="jQuery" href="http://jquery.com/">jQuery</a> - for DOM manipulation and event handling</li>
+                    <li><a target="_blank" title="Midi.js" href="http://mudcu.be/midi-js/">Midi.js</a> - for sound playback</li>
+                    <li><a target="_blank" title="Modernizr" href="http://modernizr.com/">Modernizr</a> - for browser support detection and auto-loading</li>
+                    <li><a target="_blank" title="-prefix-free" href="http://leaverou.github.io/prefixfree/">-prefix-free</a> - for automatic runtime vendor prefixing</li>
+                    <li><a target="_blank" title="PubsubJS" href="https://github.com/nazomikan/PubsubJS">PubsubJS</a> - for custom events handling</li>
+                    <li><a target="_blank" title="Pixel Invaders Font" href="http://www.dafont.com/pixel-invaders.font">Pixel Invaders Font</a> - for presentation of game entities</li>
+                </ul>
                 <nav>
                     <a class="left" href="#about2">Back</a>
-                    <a class="right" href="#intro">To intro</a>
+                    <a class="right" href="#intro">Intro</a>
                 </nav>
             </section>
 
             <section class="cubeface" id="game">
                 <h2>Game</h2>
+                <p>
+                    Shoot the invaders down with your laser cannon. Do not let them reach the ground and avoid their missiles.
+                </p>
+                <p>
+                    To control your cannon, press keyboard keys configurable in <a href="#setup" title="settings">settings</a>
+                    or click / tap upper half of screen to shoot and lower quarters to move left and right.
+                </p>
                 <nav>
                     <a class="center" href="#play" id="playbutton">Play game</a>
                     <a class="down" href="#intro">Exit game</a>
