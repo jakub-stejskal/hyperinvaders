@@ -2,7 +2,7 @@
   Canvas-based view - draws game state
  */
 function SvgView(element, drawMode) {
-  this.element = element || $("body");
+  this.element = element;
   this.width = Constants.width;
   this.height = Constants.height;
   this.drawFunction = this._createDrawFunction(drawMode || "squares");
@@ -28,7 +28,7 @@ SvgView.prototype.display = function() {
   Removes DOM element from document
  */
 SvgView.prototype.hide = function() {
-  this.canvas.remove();
+  this.element.empty();
 };
 
 /**
@@ -73,16 +73,22 @@ SvgView.prototype._createDrawFunction = function(drawMode) {
   switch (drawMode) {
     case "squares":
     return function () {
-      view._drawRect(this.x, this.y, this.width, this.height, this.getAppearence("color"), this.getId());
+      if (this.hasChanged) {
+        view._drawRect(this.x, this.y, this.width, this.height, this.getAppearence("color"), this.getId());
+      }
     };
     case "chars":
     return function () {
-      view._drawChars(this.x, this.y, this.width, this.height, this.getAppearence("chars"), this.getId());
+      if (this.hasChanged) {
+        view._drawChars(this.x, this.y, this.width, this.height, this.getAppearence("chars"), this.getId());
+      }
     };
     case "both":
     return function () {
-      view._drawRect(this.x, this.y, this.width, this.height, this.getAppearence("color"), this.getId());
-      view._drawChars(this.x, this.y, this.width, this.height, this.getAppearence("chars"), this.getId());
+      if (this.hasChanged) {
+        view._drawRect(this.x, this.y, this.width, this.height, this.getAppearence("color"), this.getId());
+        view._drawChars(this.x, this.y, this.width, this.height, this.getAppearence("chars"), this.getId());
+      }
     };
   }
 };

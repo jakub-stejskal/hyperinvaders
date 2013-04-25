@@ -2,7 +2,7 @@
 	Canvas-based view - draws game state
  */
 function CanvasView(element, drawMode) {
-	this.element = element || $("body");
+	this.element = element;
 	this.width = Constants.width;
 	this.height = Constants.height;
 	this.drawFunction = this._createDrawFunction(drawMode || "squares");
@@ -26,7 +26,7 @@ CanvasView.prototype.display = function() {
 	Removes DOM element from document
  */
 CanvasView.prototype.hide = function() {
-  this.canvas.remove();
+  this.element.empty();
 };
 
 /**
