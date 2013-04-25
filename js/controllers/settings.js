@@ -118,7 +118,7 @@ Settings.prototype._keyCodeMap = {
 };
 
 Settings.prototype._save = function() {
-    this.apply();
+    this._apply();
     if (Modernizr.localstorage) {
       localStorage['saved'] = 'true';
       localStorage['keybinding'] = JSON.stringify(this.keybinding);

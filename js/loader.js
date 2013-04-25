@@ -33,14 +33,14 @@ Modernizr.load([{
   load: "components/jquery/jquery.js"
 },
 {
-  test: Modernizr.csstransforms3d && !$('html').is('-ms-'),
+  test: Modernizr.csstransforms3d && !$('html').is('.-ms-'),
   yep: "screen.css"
 },
 {
   load: Loader.navDeps,
-  complete: function () {
-    Loader.pubsub = Pubsub.create();
-    Loader.navigation = new Navigation(Loader.pubsub);
+  callback: {
+    "components/pubsubjs/pubsub.js": function () { Loader.pubsub = Pubsub.create(); },
+    "js/controllers/navigation.js": function () { Loader.navigation = new Navigation(Loader.pubsub); }
   }
 },
 {
