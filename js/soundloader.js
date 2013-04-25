@@ -1,7 +1,7 @@
 /**
   Dynamically loads sound library resources and starts playback
  */
-Modernizr.load([{
+yepnope([{
   load: [
   "components/midijs/js/MIDI/AudioDetect.js",
   "components/midijs/js/MIDI/LoadPlugin.js",

@@ -29,7 +29,7 @@ var Loader = {
   ]
 };
 
-Modernizr.load([{
+yepnope([{
   load: "components/jquery/jquery.js"
 },
 {

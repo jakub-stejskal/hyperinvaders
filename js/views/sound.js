@@ -1,5 +1,6 @@
 /**
   Handles sound playback
+  Uses MIDI.js library to produce sound.
  */
 function Sound() {
   this.playing = false;
@@ -13,17 +14,17 @@ Sound.prototype.start = function(pubsub) {
   MIDI.setVolume(0, 127);
 
   pubsub.subscribe(Events.BEAT, this.playBeat.bind(this));
-  pubsub.subscribe(Events.EXPLOSION, this.playBeat.bind(this));
+  pubsub.subscribe(Events.EXPLOSION, this.playExplosion.bind(this));
   pubsub.subscribe(Events.SHOT, this.playShot.bind(this));
   pubsub.subscribe(Events.VICTORY, this.playVictory.bind(this));
   pubsub.subscribe(Events.DEFEAT, this.playDefeat.bind(this));
 
-  pubsub.subscribe(Events.INPUT.MUTE, function (isDown) {
+  pubsub.subscribe(Events.INPUT.MUTE, function (ctx, isDown) {
     if (isDown) this.playing = !this.playing;
   }.bind(this));
 };
 
-Sound.prototype.playBeat = function(beat) {
+Sound.prototype.playBeat = function(ctx, beat) {
   switch (beat) {
     case 1: this.playNote(24, 127, 0.1); break;
     case 2: this.playNote(23, 64, 0.1); break;
@@ -32,12 +33,12 @@ Sound.prototype.playBeat = function(beat) {
   }
 };
 
-Sound.prototype.playShot = function(projectile) {
+Sound.prototype.playShot = function(ctx, projectile) {
   if (projectile.hostile === false)
     this.playNote(100, 127, 0.1);
 };
 
-Sound.prototype.playExplosion = function(hostile) {
+Sound.prototype.playExplosion = function(ctx, hostile) {
   if (hostile === false)
     this.playNote(90, 127, 0.3);
 };

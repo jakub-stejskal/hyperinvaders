@@ -31,5 +31,5 @@ Shooter.prototype.shoot = function() {
   var x = this.x + this.width / 2;
   var y = this.hostile ? this.bottom() : this.top();
   this.cooldown = Constants.cooldown;
-  this.pubsub.publish(Events.SHOT, new Projectile(this.hostile, x, y).init(this.pubsub));
+  this.pubsub.publish(Events.SHOT, null, new Projectile(this.hostile, x, y).init(this.pubsub));
 };

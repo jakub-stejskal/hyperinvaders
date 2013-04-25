@@ -16,7 +16,7 @@ Navigation.prototype._init = function() {
   }
   );
 
- this.pubsub.subscribe(Events.INPUT.PAUSE, function (isDown) {
+ this.pubsub.subscribe(Events.INPUT.PAUSE, function (ctx, isDown) {
   if (isDown) {
     current = window.location.hash.substr(1);
     window.location.hash = (current === "play") ? "game" :"play";
@@ -34,11 +34,11 @@ Navigation.prototype._navigate = function() {
   if (target === "play") {
     $("#cube").attr("class","rotate-game");
     $("body").addClass("playing");
-    this.pubsub.publish(Events.PLAY, true);
+    this.pubsub.publish(Events.PLAY, null, true);
   }
   else {
     $("body").removeClass("playing");
     $("#cube").attr("class","rotate-" + target);
-    this.pubsub.publish(Events.PLAY, false);
+    this.pubsub.publish(Events.PLAY, null, false);
   }
 };

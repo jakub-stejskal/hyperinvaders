@@ -8,6 +8,7 @@
 
     "pubsubjs": "latest",
     "yepnope": "latest",
+    "modernizr": "latest",
     "midijs": "git://github.com/mudcube/MIDI.js.git"
   }
 }

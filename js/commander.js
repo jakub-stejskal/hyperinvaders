@@ -19,7 +19,7 @@ function Commander(invaders, game) {
  */
 Commander.prototype.init = function(pubsub) {
   this.publishBeat = function (beat) {
-    pubsub.publish(Events.BEAT, beat);
+    pubsub.publish(Events.BEAT, null, beat);
   };
   return this;
 };

@@ -53,7 +53,11 @@ section, aside {
 @media (min-width:700px) {
  section {margin: 1em 10%;}
 }
-nav {text-align: center;}
+nav {
+  text-align: center;
+  background-color:rgba(255,255,255,0.1);
+  margin: 2em 0 0.5em;
+}
 p, ul {
   margin: 1em 10%;
 }
@@ -132,6 +136,7 @@ form span {
 }
 input[type=button] {
     width: 45%;
+    min-width: 70px;
 }
 input[type=submit] {
   margin-top: 2em;

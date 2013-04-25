@@ -23,13 +23,13 @@ Player.prototype = new Shooter(false);
 Player.prototype.init = function(pubsub) {
   Shooter.prototype.init.call(this, pubsub);
 
-  this.pubsub.subscribe(Events.INPUT.SHOOT, function (isDown) {
+  this.pubsub.subscribe(Events.INPUT.SHOOT, function (ctx, isDown) {
     this.shooting = isDown;
   }.bind(this));
-  this.pubsub.subscribe(Events.INPUT.LEFT, function (isDown) {
+  this.pubsub.subscribe(Events.INPUT.LEFT, function (ctx, isDown) {
     this.movingLeft = isDown;
   }.bind(this));
-  this.pubsub.subscribe(Events.INPUT.RIGHT, function (isDown) {
+  this.pubsub.subscribe(Events.INPUT.RIGHT, function (ctx, isDown) {
     this.movingRight = isDown;
   }.bind(this));
 

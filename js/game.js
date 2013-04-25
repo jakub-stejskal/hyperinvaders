@@ -4,10 +4,10 @@ function Game(pubsub) {
   this.playing = false;
   this.paused = true;
 
-  this.pubsub.subscribe(Events.SHOT, function (projectile) {
+  this.pubsub.subscribe(Events.SHOT, function (ctx, projectile) {
     this.entities.projectiles.push(projectile);
   }.bind(this));
-  this.pubsub.subscribe(Events.PLAY, function (play) {
+  this.pubsub.subscribe(Events.PLAY, function (ctx, play) {
     if (play && !this.playing) {
       this.start();
       window.location.hash = "play";
@@ -16,7 +16,7 @@ function Game(pubsub) {
       this.paused = !play;
     }
     }.bind(this));
-  this.pubsub.subscribe(Events.INPUT.RESET, function (isDown) {
+  this.pubsub.subscribe(Events.INPUT.RESET, function (ctx, isDown) {
     if (isDown) this.start();
     window.location.hash = "play";
   }.bind(this));
@@ -121,12 +121,12 @@ Game.prototype.handleVictory = function() {
   this.paused = true;
   this.playing = false;
   this.view.writeText(Texts.VICTORY);
-  this.pubsub.publish(Events.VICTORY);
+  this.pubsub.publish(Events.VICTORY, null);
 };
 
 Game.prototype.handleDefeat = function() {
   this.paused = true;
   this.playing = false;
   this.view.writeText(Texts.DEFEAT);
-  this.pubsub.publish(Events.DEFEAT);
+  this.pubsub.publish(Events.DEFEAT, null);
 };

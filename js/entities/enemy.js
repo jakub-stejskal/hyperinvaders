@@ -28,7 +28,7 @@ Enemy.prototype = new Shooter(true);
  */
 Enemy.prototype.init = function(pubsub) {
   Shooter.prototype.init.call(this, pubsub);
-  pubsub.subscribe(Events.BEAT, function(beat){
+  pubsub.subscribe(Events.BEAT, function(ctx, beat){
     this.setAppearence(beat);
   }.bind(this));
   return this;

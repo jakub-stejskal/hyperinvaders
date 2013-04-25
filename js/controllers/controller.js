@@ -10,7 +10,7 @@ function Controller(pubsub) {
   var controller = this;
   $(window).keyup(function(event) { controller._onKeyup(event);});
   $(window).keydown(function(event) { controller._onKeydown(event);});
-  $(window).keypress(function(event) { event.stopPropagation();});
+  $(window).keypress(function(event) { event.stopPropagation(); event.returnValue = false;});
 
   this.touchButtons = {
     left: $("#touchscreen button[name=left]"),
@@ -50,12 +50,12 @@ Controller.prototype._onKeyup = function(event) {
  */
 Controller.prototype._onKeypress = function(code, isDown) {
   switch (code) {
-    case this.keybinding.player.LEFT: this.pubsub.publish(Events.INPUT.LEFT, isDown); break;
-    case this.keybinding.player.RIGHT: this.pubsub.publish(Events.INPUT.RIGHT, isDown); break;
-    case this.keybinding.player.SHOOT: this.pubsub.publish(Events.INPUT.SHOOT, isDown); break;
-    case this.keybinding.MUTE: this.pubsub.publish(Events.INPUT.MUTE, isDown); break;
-    case this.keybinding.PAUSE: this.pubsub.publish(Events.INPUT.PAUSE, isDown); break;
-    case this.keybinding.RESET: this.pubsub.publish(Events.INPUT.RESET, isDown); break;
+    case this.keybinding.player.LEFT: this.pubsub.publish(Events.INPUT.LEFT, null, isDown); break;
+    case this.keybinding.player.RIGHT: this.pubsub.publish(Events.INPUT.RIGHT, null, isDown); break;
+    case this.keybinding.player.SHOOT: this.pubsub.publish(Events.INPUT.SHOOT, null, isDown); break;
+    case this.keybinding.MUTE: this.pubsub.publish(Events.INPUT.MUTE, null, isDown); break;
+    case this.keybinding.PAUSE: this.pubsub.publish(Events.INPUT.PAUSE, null, isDown); break;
+    case this.keybinding.RESET: this.pubsub.publish(Events.INPUT.RESET, null, isDown); break;
     default: return false;
   }
   return true;
@@ -66,6 +66,6 @@ Controller.prototype._onKeypress = function(code, isDown) {
  */
 Controller.prototype._onButtonClick = function(event) {
   var isDown = event.type == "mousedown" || event.type == "touchstart";
-  this.pubsub.publish(Events.INPUT[event.target.name.toUpperCase()], isDown);
+  this.pubsub.publish(Events.INPUT[event.target.name.toUpperCase()], null, isDown);
   event.preventDefault();
 };

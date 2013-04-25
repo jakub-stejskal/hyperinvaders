@@ -1,13 +1,13 @@
 function Projectile(hostile, x, y) {
   this.hostile = hostile;
-  this.width = 2;
-  this.height = 0.5 * Constants.unit;
+  this.width = 4;
+  this.height = 12;
 
   if (hostile) {
     this.verticalStep  = 5;
 
     this.color = ["#0FF", ""];
-    this.chars = ["*", ""];
+    this.chars = [".", ""];
 
     this.x = x;
     this.y = y + this.height;
@@ -16,7 +16,7 @@ function Projectile(hostile, x, y) {
     this.verticalStep = 10;
 
     this.color = ["#F90", ""];
-    this.chars = ["|", ""];
+    this.chars = [".", ""];
 
     this.x = x;
     this.y = y;
@@ -53,7 +53,7 @@ Projectile.prototype.handleCollisionsWith = function(targets) {
         this.top() < target.bottom() && this.bottom() > target.top()) {
         this.destroy();
         target.destroy();
-        this.pubsub.publish(Events.EXPLOSION, this.hostile);
+        this.pubsub.publish(Events.EXPLOSION, null, this.hostile);
       }
     }
   }
