@@ -14,7 +14,7 @@
   url("fonts/pixel_invaders.ttf") format("truetype")
 }
 
-/*[data-icon]:before {
+[data-icon]:before {
   font-family: 'Entypo';
   content: attr(data-icon);
   text-transform: none;
@@ -25,7 +25,7 @@
 a[data-icon]:before {
   font-size: 2em;
   vertical-align: middle;
-}*/
+}
 body {
   background-color: #222;
   font-family: 'Geo', monospace;

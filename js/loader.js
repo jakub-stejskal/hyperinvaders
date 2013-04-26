@@ -29,9 +29,7 @@ var Loader = {
   ]
 };
 
-yepnope([{
-  load: "components/jquery/jquery.js"
-},
+yepnope([
 {
   test: Modernizr.csstransforms3d && !$('html').is('.-ms-'),
   yep: "screen.css"
