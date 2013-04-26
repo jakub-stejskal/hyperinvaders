@@ -1,0 +1,201 @@
+@import url(https://fonts.googleapis.com/css?family=Geo);
+
+@font-face{
+  font-family:'Entypo';
+  src:url("fonts/entypo.eot?#") format("eot"),
+  url("fonts/entypo.woff") format("woff"),
+  url("fonts/entypo.ttf") format("truetype")
+}
+
+@font-face {
+  font-family:'Invaders';
+  src:
+  url("fonts/pixel_invaders.ttf") format("truetype")
+}
+
+/*[data-icon]:before {
+  font-family: 'Entypo';
+  content: attr(data-icon);
+  text-transform: none;
+  margin-right: 0.1em;
+  line-height: 0;
+}
+
+a[data-icon]:before {
+  font-size: 2em;
+  vertical-align: middle;
+}*/
+body {
+  background-color: #222;
+  font-family: 'Geo', monospace;
+  text-align: center;
+  font-size: 1.2em;
+}
+h1 {
+  margin-top: 5px;
+  font-size: 3em;
+  color: #FFF;
+  text-shadow: 0 1px 0 #999, 0 2px 0 #888, 0 3px 0 #777, 0 4px 0 #666,
+  0 5px 0 #555, 0 6px 0 #444, 0 7px 0 #333, 0 8px 7px #001135;
+}
+h2 {
+  font-size: 2em;
+  margin: 50px 20px 50px;
+  text-shadow: 3px 5px 5px rgba(0,0,0,.25);
+}
+section, aside {
+  position: relative;
+  transition: all 600ms;
+  border: 1px solid;
+  background-color: rgb(50, 50, 50);
+  padding-bottom: 10px;
+}
+@media (min-width:700px) {
+ section {margin: 1em 10%;}
+}
+nav {
+  text-align: center;
+  background-color:rgba(255,255,255,0.1);
+  margin: 2em 0 0.5em;
+}
+p, ul {
+  margin: 1em 10%;
+}
+ul, dl {
+  text-align: left;
+  list-style-type: square;
+}
+li {
+  margin-bottom: 1em;
+}
+dt {
+  font-weight: bold;
+}
+dt, dd {
+  display: inline;
+  margin: 5px;
+}
+dt:after {
+  content: ':';
+}
+dd:after {
+  content: '\A';
+  white-space:pre;
+}
+a {
+  text-align: center;
+  border-radius: 5px;
+  color: black;
+  line-height: 1em;
+  text-decoration: none;
+  background-color:rgb(255,255,255);
+  background-color:rgba(255,255,255,0.2);
+  padding: 5px;
+  white-space: nowrap;
+  position: relative;
+}
+
+form {
+  padding: 0 20%;
+  text-align: left;
+}
+input, label {
+  padding: 0.5em;
+  width: 40%;
+}
+input {
+  color: black;
+  background-color: white;
+  background-color: rgba(0,0,0,0.1);
+  border: 0;
+  box-shadow: inset 3px 5px 5px rgba(0,0,0,0.25);
+  font: 1em Geo;
+  text-align: center;
+}
+input:focus, input:not([disabled]):active {
+  outline: none;
+  background-color: white;
+  background-color: rgba(255,255,255,0.1);
+}
+label {
+  display: block;
+  text-align: right;
+  float:left;
+}
+input + span {
+  padding: 0.5em;
+}
+input[disabled] {
+  color: rgb(0,0,0);
+  color: rgba(0,0,0,0.25);
+  opacity: 0.5;
+}
+form span {
+  width: 40%;
+  display: inline-block;
+}
+input[type=button] {
+    width: 45%;
+    min-width: 70px;
+}
+input[type=submit] {
+  margin-top: 2em;
+}
+
+#intro {
+  background-color: rgb(240, 130, 130);
+  background-color: rgba(240, 130, 130, 0.93);
+}
+#about1 {
+  background-color: rgb(130, 240, 130);
+  background-color: rgba(130, 240, 130, 0.93);
+}
+#about2 {
+  background-color: rgb(130, 130, 240);
+  background-color: rgba(130, 130, 240, 0.93);
+}
+#about3 {
+  background-color: rgb(240, 240, 130);
+  background-color: rgba(240, 240, 130, 0.93);
+}
+#setup {
+  background-color: rgb(240, 130, 240);
+  background-color: rgba(240, 130, 240, 0.93);
+}
+#game  {
+  background-color: rgb(130, 240, 240);
+  background-color: rgba(130, 240, 240, 0.93);
+}
+#play  {
+  color: white;
+  border: 0;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.93);
+}
+#play p {
+  font-size: 32px;
+  text-align: center;
+}
+
+#touchscreen {
+  opacity: 0.05;
+}
+#touchscreen button[name=shoot]{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+}
+#touchscreen button[name=left], #touchscreen button[name=right]{
+  position: absolute;
+  top: 50%;
+  width: 50%;
+  height: 50%;
+}
+#touchscreen button[name=left]{
+  left: 0;
+}
+#touchscreen button[name=right]{
+  left: 50%;
+}

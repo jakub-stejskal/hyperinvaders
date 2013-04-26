@@ -1,0 +1,120 @@
+@media only screen and (min-width:651px) and (min-height:651px) {
+
+.screen-centered
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    margin-top: -20px;
+}
+
+@keyframes rotate-cube {
+  from {  transform: translateZ(-1000px) rotateZ(0deg) rotateY(0deg);}
+  to{ transform: translateZ(-1000px) rotateZ(1080deg) rotateY(360deg);}
+}
+
+.stage {
+  perspective: 700px;
+  transform-style: preserve-3d;
+  position: absolute;
+}
+
+#cube {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  top: 50%;
+  left: 50%;
+  margin-top: -300px;
+  margin-left: -300px;
+  transform-style: preserve-3d;
+  transition: all 700ms;
+  transform: translateZ(-300px);
+}
+
+#cube {
+  animation: rotate-cube 15s linear infinite;
+  animation-delay: 2s;
+}
+#cube:hover, .playing #cube {
+  animation: none;
+}
+
+section {
+  top: 15px;
+  left: 15px;
+  height: 600px;
+  width: 600px;
+  margin: 0;
+  padding-bottom: 0;
+}
+aside {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  box-shadow: 3px 5px 5px rgba(0,0,0,0.25);
+  border: none;
+  z-index: -1;
+}
+p {
+  margin: 1em 3em;
+}
+
+#cube.rotate-intro { transform: translateZ(-300px) rotateY(0deg); }
+#cube.rotate-about1 { transform: translateZ(-300px) rotateY(-90deg); }
+#cube.rotate-about2 { transform: translateZ(-300px) rotateY(-180deg); }
+#cube.rotate-about3 { transform: translateZ(-300px) rotateY(-270deg); }
+#cube.rotate-setup { transform: translateZ(-300px) rotateX(90deg); }
+#cube.rotate-game { transform: translateZ(-300px) rotateX(-90deg); }
+
+section { position: absolute; }
+#intro { transform: translateZ(300px); }
+#about1 { transform: translateX(300px) rotateY(90deg); }
+#about2 { transform: translateZ(-300px) rotateY(180deg); }
+#about3 { transform: translateX(-300px) rotateY(-90deg); }
+#setup { transform: translateY(300px) rotateX(-90deg); }
+#game { transform: translateY(-300px) rotateX(90deg); }
+#play { transform: translateY(250px) rotateX(90deg); }
+
+.up, .down, .left, .right {
+  position: absolute;
+}
+.up, .down {
+  width: 50%;
+  left: 25%;
+}
+.left, .right {
+  top: 25%;
+  width: 15px;
+  height: 300px;
+  word-wrap: break-word;
+  white-space: normal;
+  letter-spacing: 10px;
+}
+.up   { top: 5px; }
+.down   { bottom: 5px; }
+.right  { right: 5px; }
+.left   { left: 5px; }
+
+
+#play {
+  opacity: 0;
+}
+.playing #game {
+  opacity: 0;
+  transform: translateY(250px) rotateX(90deg);
+}
+.playing #play {
+  transform: translateY(-290px) rotateX(90deg);
+  opacity: 1;
+}
+#playbutton {
+  opacity: 1;
+}
+.playing #playbutton {
+  opacity: 0;
+}
+}

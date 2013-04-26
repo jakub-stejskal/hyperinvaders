@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<!-- <html manifest="cache.manifest"> -->
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5">
+    <title>Hyper Invaders</title>
+
+    <link rel="stylesheet" type="text/css" media="all" href="all.css" />
+    <script src="components/prefix-free/prefixfree.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="components/prefix-free/plugins/prefixfree.dynamic-dom.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="components/jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="components/yepnope/yepnope.js" type="text/javascript" charset="utf-8"></script>
+    <script src="components/modernizr/modernizr.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="js/loader.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/soundloader.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
+<body>
+
+<h1 data-icon="🚀">Hyper Invaders</h1>
+
+    <div class="stage stage2 screen-centered">
+        <div id="cube" class="intro">
+            <section class="cubeface" id="intro">
+                <h2>Intro</h2>
+                <p>
+                    Welcome to Hyper Invaders game.
+                </p>
+                <p>
+                    You can
+                    <a href="#play" title="play the game">play the game</a> straight away or learn
+                    <a href="#game" title="how to play">how to play</a> first.
+                </p>
+                <p>
+                    You might also want to adjust controls and draw method in
+                    <a href="#setup" title="settings">settings</a> or learn something more about
+                    <a href="#about1" title="general info">general info</a>,
+                    <a href="#about2" title="features">features</a> or
+                    <a href="#about3" title="dependencies">dependencies</a> of the game.
+                </p>
+                <nav>
+                    <a data-icon="✉" class="up" href="#game">Play game</a>
+                    <a class="right" href="#about1">About</a>
+                    <a class="down" href="#setup">Settings</a>
+                </nav>
+            </section>
+
+            <section class="cubeface" id="about1" itemscope itemtype="http://schema.org/WebApplication">
+                <h2>About 1/3</h2>
+                <p >
+                    <span itemprop="name">HyperInvaders</span>
+                    is a
+                    <span itemprop="description">
+                        <span itemprop="applicationSubCategory">shoot 'em up</span>
+                        <span itemprop="applicationCategory">game</span>
+                        inspired by
+                        <a href="http://en.wikipedia.org/wiki/Space_Invaders" title="Wikipedia article on Space Invaders">Space Invaders</a>
+                    </span>.
+                </p>
+                <p>
+                    It was created in
+                    <time itemprop="dateCreated">2013</time>
+                    by
+                    <a href="https://plus.google.com/115118938925955330274?rel=author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                        <span  itemprop="givenName">Jakub</span> <span itemprop="familyName">Stejskal</span>
+                    </a>,
+                    as a
+                    <span itemprop="educationalUse">course project</span>
+                    of A0M33KAJ (Client applications development in JavaScript).
+                    As such, it served mainly as an opportunity to practice development with modern web technologies and it lacks some features of the original game.
+                </p>
+                <p>
+                    The game should run on
+                    <span  itemprop="operatingSystem">any desktop and mobile system</span>
+                    provided that it has browser with
+                    <span itemprop="browserRequirements">HTML5 support</span>
+                    comparable to main browsers as of 2013.
+                </p>
+                <p>
+                    Source code is available at
+                    <a target="_blank" title="Project GitHub Repository" href="https://github.com/jakub-stejskal/hyperinvaders" itemprop="downloadUrl" >
+                        https://github.com/jakub-stejskal/hyperinvaders
+                    </a>
+                </p>
+                <nav>
+                    <a class="left" href="#intro">Back</a>
+                    <a class="right" href="#about2">Next</a>
+                </nav>
+            </section>
+
+            <section class="cubeface" id="about2">
+                <h2>About 2/3</h2>
+                <p>
+                    These are features and technologies used in the app, it also happens to be a list of requirements for the course project:
+                </p>
+                <ul>
+                    <li>it is a valid HTML5 document and it is cross-browser compatible and responsive</li>
+                    <li>it uses semantic elements, microformats, SVG and canvas graphics and audio element</li>
+                    <li>it runs offline (yet without sound) thanks to cache</li>
+                    <li>it uses CSS3 selectors, transformation, transitions, animation and media queries</li>
+                    <li>it dynamically handles vendor prefixes thanks to -prefix-free library</li>
+                    <li>it is written in OOP manner, it uses new JS APIs (LocalStorage, Media API..)</li>
+                </ul>
+                <nav>
+                    <a class="left" href="#about1">Back</a>
+                    <a class="right" href="#about3">Next</a>
+                </nav>
+            </section>
+
+            <section class="cubeface" id="about3">
+                <h2>About 3/3</h2>
+                <p>
+                    These are libraries and resources this project is dependent on:
+                </p>
+                <ul>
+                    <li><a target="_blank" title="jQuery" href="http://jquery.com/">jQuery</a> - for DOM manipulation and event handling</li>
+                    <li><a target="_blank" title="Midi.js" href="http://mudcu.be/midi-js/">Midi.js</a> - for sound playback</li>
+                    <li><a target="_blank" title="Modernizr" href="http://modernizr.com/">Modernizr</a> - for browser support detection and auto-loading</li>
+                    <li><a target="_blank" title="-prefix-free" href="http://leaverou.github.io/prefixfree/">-prefix-free</a> - for automatic runtime vendor prefixing</li>
+                    <li><a target="_blank" title="PubsubJS" href="https://github.com/nazomikan/PubsubJS">PubsubJS</a> - for custom events handling</li>
+                    <li><a target="_blank" title="Pixel Invaders Font" href="http://www.dafont.com/pixel-invaders.font">Pixel Invaders Font</a> - for presentation of game entities</li>
+                </ul>
+                <nav>
+                    <a class="left" href="#about2">Back</a>
+                    <a class="right" href="#intro">Intro</a>
+                </nav>
+            </section>
+
+            <section class="cubeface" id="game">
+                <h2>Game</h2>
+                <p>
+                    Shoot the invaders down with your laser cannon. Do not let them reach the ground and avoid their missiles.
+                </p>
+                <p>
+                    To control your cannon, press keyboard keys configurable in <a href="#setup" title="settings">settings</a>
+                    or click / tap upper half of screen to shoot and lower quarters to move left and right.
+                </p>
+                <nav>
+                    <a class="center" href="#play" id="playbutton">Play game</a>
+                    <a class="down" href="#intro">Exit game</a>
+                </nav>
+            </section>
+
+            <section class="cubeface" id="setup">
+                <h2>Settings</h2>
+                <form>
+                    <label for="left-input">Move left </label><input id="left-input" name="left" type="text" />
+                    <label for="right-input">Move right </label><input id="right-input" name="right" type="text" />
+                    <label for="shoot-input">Shoot </label><input id="shoot-input" name="shoot" type="text" />
+
+                    <label>Draw method</label>
+                    <span>
+                    <input type="button" name="drawMethod" value="svg" />
+                    <input type="button" name="drawMethod" value="canvas" />
+                    </span>
+
+                    <input name="save" type="submit" value="Save settings" />
+                    <span id="form-info"></span>
+                </form>
+                <nav>
+                    <a class="up" href="#intro">Back</a>
+                </nav>
+            </section>
+
+            <section class="cubeface" id="play">
+                <div id="viewContainer">
+                    <p>Game is not loaded yet.</p>
+                </div>
+                <div id="touchscreen">
+                    <button type="button" name="left"></button>
+                    <button type="button" name="right"></button>
+                    <button type="button" name="shoot"></button>
+                </div>
+                <nav>
+                    <a class="down" href="#game">Play / Pause</a>
+                </nav>
+            </section>
+        </div>
+    </div>
+    <aside>
+        <h2>Shortcuts</h2>
+        <dl>
+            <dt>P</dt>
+            <dd>pause / play</dd>
+            <dt>R</dt>
+            <dd>restart</dd>
+            <dt>M</dt>
+            <dd>mute / unmute</dd>
+        </dl>
+    </aside>
+</body>
+</html>
