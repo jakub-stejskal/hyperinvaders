@@ -14,23 +14,23 @@ components/yepnope/yepnope.1.5.4-min.js
 components/pubsubjs/pubsub.js
 
 js/loader.js
-js/navigation.js
-js/events.js
-js/constants.js
-js/texts.js
+js/constants/events.js
+js/constants/constants.js
+js/constants/texts.js
+js/constants/levels.js
 js/entities/entity.js
 js/entities/shooter.js
 js/entities/player.js
 js/entities/enemy.js
 js/entities/projectile.js
+js/views/canvasView.js
+js/views/svgView.js
+js/views/sound.js
 js/commander.js
-js/levels.js
-js/controller.js
-js/svgView.js
-js/canvasView.js
-js/sound.js
 js/game.js
-js/settings.js
+js/controllers/navigation.js
+js/controllers/controller.js
+js/controllers/settings.js
 
 stylesheet.css
 
