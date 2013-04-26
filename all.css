@@ -10,6 +10,7 @@
 @font-face {
   font-family:'Invaders';
   src:
+  url("fonts/pixel_invaders.woff") format("woff"),
   url("fonts/pixel_invaders.ttf") format("truetype")
 }
 
@@ -53,7 +54,7 @@ section, aside {
   box-shadow: 10px 10px 10px rgba(0,0,0,.25);
 }
 @media (min-width:700px) {
- section { margin: 2em 10%; }
+ section, aside { margin: 2em 10%; }
 }
 nav {
   text-align: center;
@@ -66,6 +67,7 @@ p, ul {
 ul, dl {
   text-align: left;
   list-style-type: square;
+  display: inline-block;
 }
 li {
   margin-bottom: 1em;
@@ -96,6 +98,9 @@ a {
   white-space: nowrap;
   position: relative;
 }
+p a {
+  white-space: inherit;
+}
 
 form {
   padding: 0 20%;
@@ -103,6 +108,7 @@ form {
 }
 input, label {
   padding: 0.5em;
+  margin-bottom: 0.5em;
   width: 40%;
 }
 input {
@@ -114,15 +120,17 @@ input {
   font: 1em Geo;
   text-align: center;
 }
+label:before {
+  content: '\A';
+}
 input:focus, input:not([disabled]):active {
   outline: none;
   background-color: white;
   background-color: rgba(255,255,255,0.1);
 }
 label {
-  display: block;
+  display: inline-block;
   text-align: right;
-  float:left;
 }
 input + span {
   padding: 0.5em;
@@ -133,15 +141,20 @@ input[disabled] {
   opacity: 0.5;
 }
 form span {
-  width: 40%;
+  width: auto;
   display: inline-block;
 }
 input[type=button] {
-    width: 45%;
+    width: 40%;
     min-width: 70px;
 }
 input[type=submit] {
   margin-top: 2em;
+  width: 100%
+}
+#form-info {
+  width: 100%;
+  text-align: center;
 }
 
 #intro {
@@ -181,19 +194,22 @@ input[type=submit] {
 
 #touchscreen {
   opacity: 0.05;
+  filter:alpha(opacity=0.05);
+}
+#touchscreen button {
+  background: transparent;
+  position: absolute;
+  height: 50%;
 }
 #touchscreen button[name=shoot]{
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 50%;
 }
 #touchscreen button[name=left], #touchscreen button[name=right]{
-  position: absolute;
   top: 50%;
   width: 50%;
-  height: 50%;
 }
 #touchscreen button[name=left]{
   left: 0;
