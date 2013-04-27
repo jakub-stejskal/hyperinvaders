@@ -200,6 +200,7 @@ input[type=submit] {
   background: transparent;
   position: absolute;
   height: 50%;
+  border-radius: 10px;
 }
 #touchscreen button[name=shoot]{
   top: 0;

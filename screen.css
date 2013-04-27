@@ -90,11 +90,17 @@ p {
 }
 .left, .right {
   top: 25%;
-  width: 15px;
+  width: 29px;
   height: 300px;
   word-wrap: break-word;
   white-space: normal;
   letter-spacing: 10px;
+
+  box-sizing: border-box;
+  padding: 5em 10px;
+}
+.left:before, .right:before {
+  margin-left: -5px;
 }
 .up   { top: 5px; }
 .down   { bottom: 5px; }
