@@ -9,33 +9,38 @@ NETWORK:
 
 CACHE:
 components/jquery/jquery.min.js
+components/modernizr/modernizr.js
+
 components/prefix-free/prefixfree.min.js
-components/yepnope/yepnope.1.5.4-min.js
+components/prefix-free/plugins/prefixfree.dynamic-dom.min.js
 components/pubsubjs/pubsub.js
+components/yepnope/yepnope.1.5.4-min.js
 
-js/loader.js
-js/navigation.js
-js/events.js
-js/constants.js
-js/texts.js
-js/entities/entity.js
-js/entities/shooter.js
-js/entities/player.js
+js/constants/constants.js
+js/constants/events.js
+js/constants/levels.js
+js/constants/texts.js
+js/controllers/navigation.js
+js/controllers/controller.js
+js/controllers/settings.js
 js/entities/enemy.js
+js/entities/entity.js
+js/entities/player.js
 js/entities/projectile.js
+js/entities/shooter.js
+js/views/svgView.js
+js/views/canvasView.js
+js/views/sound.js
 js/commander.js
-js/levels.js
-js/controller.js
-js/svgView.js
-js/canvasView.js
-js/sound.js
 js/game.js
-js/settings.js
+js/loader.js
 
-stylesheet.css
+all.css
+screen.css
 
 fonts/entypo.ttf
 fonts/entypo.woff
 fonts/pixel_invaders.ttf
+fonts/pixel_invaders.woff
 
 
