@@ -142,7 +142,7 @@
   function checkContext(obj) {
     if (!(obj instanceof Context) &&
       !(obj instanceof Pubsub) &&
-      toString.call(obj) !== "[object Null]") {
+      !(obj == null)) {
       return false;
     }
     return true;
